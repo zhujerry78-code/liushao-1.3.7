@@ -1,5 +1,7 @@
 # 流哨 1.3.7 / r12-engine
 
+> 本仓库为源码发布。冻结模型（model.joblib、engine.joblib）与离线运行时不在仓库中，完整运行请使用网盘中的 Windows 运行包。
+
 1.3.7 算法升级：新增“可信研判引擎”（liushao_engine），在冻结的 RF/LR 基学习器之上叠加
 ECOD 无监督检测、Dempster–Shafer 证据融合、Mondrian 共形预测与 Venn–Abers 区间。
 主队列按融合信任度排序，“需要再检查”收录共形不确定与高冲突记录；引擎不可用时自动退回 1.3.6 行为。
