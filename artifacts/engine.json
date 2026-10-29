@@ -1,0 +1,50 @@
+{
+  "format": 1,
+  "engine_version": "engine-00dca9fe9e73",
+  "engine_sha256": "01fe41d5349d7161237f981c29b3c61db40a8742a6f157f79442c6dd1014c131",
+  "base_model_version": "c7a028b4e4cafedd",
+  "base_model_sha256": "3c5b425f3a34454bd2b5a2738535742cc03e0f8f6e55fefc5abc5929c4dccad7",
+  "data_version": "e946961bf545243c081c8995ae582b56c968bf35094d12c2e0a17d7bfea04b87",
+  "data_sha256": {
+    "features.parquet": "fa0b563c6ed52d7bbd16858ef90c906d4b776df161287176f651dbe119f87069",
+    "manifest.parquet": "1c86e8b99a8f1b3502fde8c34f881ab94733bfc911d6514b9c8919fa19271b9b"
+  },
+  "chain": [
+    "ECOD (train normal only)",
+    "Dempster-Shafer fusion of RF/LR/ECOD",
+    "Mondrian split conformal",
+    "Inductive Venn-Abers",
+    "Saabas tree-path attribution",
+    "MMD two-sample drift test"
+  ],
+  "splits_used": {
+    "ecod": "train, label Benign only",
+    "fusion_calibration": "validation half A (stratified, seed 42)",
+    "conformal_and_venn_abers": "validation half B",
+    "test": "not read"
+  },
+  "rows": {
+    "ecod_rows": 20000,
+    "calibration_a": 10734,
+    "calibration_b": 10734,
+    "calibration_b_attacks": 2393
+  },
+  "reliability": {
+    "rf": 0.99,
+    "lr": 0.99,
+    "ecod": 0.8829266794565713
+  },
+  "epsilon": 0.05,
+  "conflict_quantile": 0.99,
+  "conflict_cut": 0.8866900277768005,
+  "fit_seconds": 0.3825858000200242,
+  "source_code_sha256": {
+    "liushao_engine/__init__.py": "b89819e9fdd0316fdd9cbd0b4c8d46bf6c1646a88d16458d0f9a51bea319fa1c",
+    "liushao_engine/attribution.py": "693b868b6d7812655159fe213d82d729bcb5545886a601322d5c524f19fa6ae3",
+    "liushao_engine/conformal.py": "01ff755f32c360a51c384be6f749d8fbc5119ba634fe290f15e0da75b4041d21",
+    "liushao_engine/ecod.py": "477326bad0ed0867800d8b150dad2ce8ed95594a11cdc355d63c7bb288c16d64",
+    "liushao_engine/evidence.py": "11f14bb26123525f46f0113912789a69c3d51be3916b2c429d61644883143369",
+    "liushao_engine/mmd.py": "dc54b9cf68390e9003078d556a078635848521692037c7fdcd748acef4328c6a",
+    "liushao_engine/venn_abers.py": "83376d9e4f7710aa5846200fd03bb4dd0abe1670c5cf12dd126b368010e14fcf"
+  }
+}

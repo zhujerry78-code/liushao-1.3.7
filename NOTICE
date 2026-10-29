@@ -1,0 +1,31 @@
+Liushao - local network anomaly review assistant
+Copyright 2026 元启智联 (LiuShao Project Contributors)
+
+The original source code, tests, scripts, necessary configuration and accompanying usage
+instructions identified in docs/release/SOURCE_LICENSE.md are licensed under
+the Apache License, Version 2.0. See LICENSE for the complete terms.
+
+Existing author attributions remain applicable. This notice does not claim
+that any single contributor independently authored all project contributions.
+Third-party components retain their own copyright, license and NOTICE terms;
+see THIRD_PARTY_NOTICES.md and the bundled third-party notices.
+
+The frozen c7a028b4e4cafedd model, its descriptor and reference data are not
+covered by this source license. Their use is limited to directed competition
+review and non-commercial academic research:
+赛事评审与非商业学术研究定向使用
+
+demo.csv and demo_origins.parquet retain the CSE-CIC-IDS2018 citation and
+redistribution terms; they are not relicensed under Apache-2.0. See
+THIRD_PARTY_NOTICES.md for the official dataset and AWS links.
+
+CPython and the 50 locked dependency wheel packages retain their original
+licenses. The final offline package must preserve the existing 72 dependency
+license/NOTICE statements and applicable runtime notices. This notice does
+not assert that a new final offline package has already been built.
+
+Unredacted actual traffic, human-participant records, logs, chats, review
+databases and sensitive exports are excluded from the distribution.
+
+AI-assisted development is disclosed in THIRD_PARTY_NOTICES.md. Automated
+verification is not a substitute for actual human-participant study evidence.

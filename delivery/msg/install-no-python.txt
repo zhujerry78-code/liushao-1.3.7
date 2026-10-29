@@ -1,0 +1,2 @@
+没有找到可用的 64 位 Python 3.12：包内 runtime\python 缺失或被杀毒软件隔离。
+请重新完整解压原包；或设置 LIUSHAO_PYTHON 指向一个完整的 64 位 Python 3.12。

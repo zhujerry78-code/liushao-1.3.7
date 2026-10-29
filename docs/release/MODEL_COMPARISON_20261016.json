@@ -1,0 +1,3023 @@
+{
+  "status": "completed",
+  "started_at_utc": "2026-10-16T14:24:50.126939+00:00",
+  "git_head": "154d15d956a9ab8e0cfbd0e2ee3d92024b7ae7b5",
+  "script_sha256": "1c234587d426fd9dafe3f8f7acea76d789b9adfe1bc485df40e68f1ea3c27f76",
+  "python": "3.12.14",
+  "platform": "Windows-11-10.0.26300-SP0",
+  "arguments": {
+    "original_zip": "<历史本机目录>/流哨_原冻结模型交接包_c7a028b4e4cafedd_2026-10-16.zip",
+    "rebuilt_zip": "<历史本机目录>/流哨_今晚验证模型_15547c4b02b362e0_2026-10-16.zip",
+    "external_source": "<历史本机目录>/Thursday-15-02-2018_TrafficForML_CICFlowMeter.csv",
+    "output": "<历史工作目录>"
+  },
+  "models": {
+    "original": {
+      "model_version": "c7a028b4e4cafedd",
+      "model_sha256": "3c5b425f3a34454bd2b5a2738535742cc03e0f8f6e55fefc5abc5929c4dccad7",
+      "descriptor_sha256": "e280995a00084234c538720541db6475bb51382c4e2ffc9c0e4db8cbde933880",
+      "config": {
+        "data_version": "e946961bf545243c081c8995ae582b56c968bf35094d12c2e0a17d7bfea04b87",
+        "features": [
+          "Protocol",
+          "Flow Duration",
+          "Tot Fwd Pkts",
+          "Tot Bwd Pkts",
+          "TotLen Fwd Pkts",
+          "TotLen Bwd Pkts",
+          "Fwd Pkt Len Max",
+          "Fwd Pkt Len Min",
+          "Fwd Pkt Len Mean",
+          "Fwd Pkt Len Std",
+          "Bwd Pkt Len Max",
+          "Bwd Pkt Len Min",
+          "Bwd Pkt Len Mean",
+          "Bwd Pkt Len Std",
+          "Flow Byts/s",
+          "Flow Pkts/s",
+          "Flow IAT Mean",
+          "Flow IAT Std",
+          "Flow IAT Max",
+          "Flow IAT Min",
+          "Fwd IAT Tot",
+          "Fwd IAT Mean",
+          "Fwd IAT Std",
+          "Fwd IAT Max",
+          "Fwd IAT Min",
+          "Bwd IAT Tot",
+          "Bwd IAT Mean",
+          "Bwd IAT Std",
+          "Bwd IAT Max",
+          "Bwd IAT Min",
+          "Fwd PSH Flags",
+          "Bwd PSH Flags",
+          "Fwd URG Flags",
+          "Bwd URG Flags",
+          "Fwd Header Len",
+          "Bwd Header Len",
+          "Fwd Pkts/s",
+          "Bwd Pkts/s",
+          "Pkt Len Min",
+          "Pkt Len Max",
+          "Pkt Len Mean",
+          "Pkt Len Std",
+          "Pkt Len Var",
+          "FIN Flag Cnt",
+          "SYN Flag Cnt",
+          "RST Flag Cnt",
+          "PSH Flag Cnt",
+          "ACK Flag Cnt",
+          "URG Flag Cnt",
+          "CWE Flag Count",
+          "ECE Flag Cnt",
+          "Down/Up Ratio",
+          "Pkt Size Avg",
+          "Fwd Seg Size Avg",
+          "Bwd Seg Size Avg",
+          "Fwd Byts/b Avg",
+          "Fwd Pkts/b Avg",
+          "Fwd Blk Rate Avg",
+          "Bwd Byts/b Avg",
+          "Bwd Pkts/b Avg",
+          "Bwd Blk Rate Avg",
+          "Subflow Fwd Pkts",
+          "Subflow Fwd Byts",
+          "Subflow Bwd Pkts",
+          "Subflow Bwd Byts",
+          "Init Fwd Win Byts",
+          "Init Bwd Win Byts",
+          "Fwd Act Data Pkts",
+          "Fwd Seg Size Min",
+          "Active Mean",
+          "Active Std",
+          "Active Max",
+          "Active Min",
+          "Idle Mean",
+          "Idle Std",
+          "Idle Max",
+          "Idle Min"
+        ],
+        "rf_threshold": 0.12,
+        "lr_threshold": 0.84,
+        "near_margin": 0.1,
+        "sklearn": "1.7.2",
+        "algorithm_version": "liushao-mvp-1",
+        "n_estimators": 160,
+        "max_depth": 18,
+        "min_samples_leaf": 2,
+        "seed": 42,
+        "threshold_rule": "validation F1 maximum over 0.05..0.95 step0.01; ties higher threshold",
+        "margin_rule": "validation absolute distance 10th percentile, clipped to [0.01,0.10]"
+      },
+      "training_rows": 161331,
+      "normal_reference_rows": 87005,
+      "app_guard_context": "75d73b7aecd2fa8791f3c469e0f66945913584f14d4de03d6fc24629cb30e786",
+      "classes": {
+        "rf": [
+          0,
+          1
+        ],
+        "lr": [
+          0,
+          1
+        ]
+      },
+      "pipeline_steps": {
+        "rf": [
+          "impute",
+          "classifier"
+        ],
+        "lr": [
+          "impute",
+          "log",
+          "scale",
+          "classifier"
+        ]
+      },
+      "classifier_dimensions": {
+        "rf": 79,
+        "lr": 79
+      },
+      "legacy_application_load_passed": true
+    },
+    "rebuilt": {
+      "model_version": "15547c4b02b362e0",
+      "model_sha256": "40ee89927c853d4d0ada25f32b7ed464838562c3c0b2b52b737570d6d9d4bea6",
+      "descriptor_sha256": "8eb8c09b5eaa7e77bd044051c0df4e4a5abc9bc5d35907be97161f5bc1caf30a",
+      "config": {
+        "data_version": "e946961bf545243c081c8995ae582b56c968bf35094d12c2e0a17d7bfea04b87",
+        "features": [
+          "Protocol",
+          "Flow Duration",
+          "Tot Fwd Pkts",
+          "Tot Bwd Pkts",
+          "TotLen Fwd Pkts",
+          "TotLen Bwd Pkts",
+          "Fwd Pkt Len Max",
+          "Fwd Pkt Len Min",
+          "Fwd Pkt Len Mean",
+          "Fwd Pkt Len Std",
+          "Bwd Pkt Len Max",
+          "Bwd Pkt Len Min",
+          "Bwd Pkt Len Mean",
+          "Bwd Pkt Len Std",
+          "Flow Byts/s",
+          "Flow Pkts/s",
+          "Flow IAT Mean",
+          "Flow IAT Std",
+          "Flow IAT Max",
+          "Flow IAT Min",
+          "Fwd IAT Tot",
+          "Fwd IAT Mean",
+          "Fwd IAT Std",
+          "Fwd IAT Max",
+          "Fwd IAT Min",
+          "Bwd IAT Tot",
+          "Bwd IAT Mean",
+          "Bwd IAT Std",
+          "Bwd IAT Max",
+          "Bwd IAT Min",
+          "Fwd PSH Flags",
+          "Bwd PSH Flags",
+          "Fwd URG Flags",
+          "Bwd URG Flags",
+          "Fwd Header Len",
+          "Bwd Header Len",
+          "Fwd Pkts/s",
+          "Bwd Pkts/s",
+          "Pkt Len Min",
+          "Pkt Len Max",
+          "Pkt Len Mean",
+          "Pkt Len Std",
+          "Pkt Len Var",
+          "FIN Flag Cnt",
+          "SYN Flag Cnt",
+          "RST Flag Cnt",
+          "PSH Flag Cnt",
+          "ACK Flag Cnt",
+          "URG Flag Cnt",
+          "CWE Flag Count",
+          "ECE Flag Cnt",
+          "Down/Up Ratio",
+          "Pkt Size Avg",
+          "Fwd Seg Size Avg",
+          "Bwd Seg Size Avg",
+          "Fwd Byts/b Avg",
+          "Fwd Pkts/b Avg",
+          "Fwd Blk Rate Avg",
+          "Bwd Byts/b Avg",
+          "Bwd Pkts/b Avg",
+          "Bwd Blk Rate Avg",
+          "Subflow Fwd Pkts",
+          "Subflow Fwd Byts",
+          "Subflow Bwd Pkts",
+          "Subflow Bwd Byts",
+          "Init Fwd Win Byts",
+          "Init Bwd Win Byts",
+          "Fwd Act Data Pkts",
+          "Fwd Seg Size Min",
+          "Active Mean",
+          "Active Std",
+          "Active Max",
+          "Active Min",
+          "Idle Mean",
+          "Idle Std",
+          "Idle Max",
+          "Idle Min"
+        ],
+        "rf_threshold": 0.12,
+        "lr_threshold": 0.8499999999999999,
+        "near_margin": 0.1,
+        "sklearn": "1.7.2",
+        "algorithm_version": "liushao-mvp-1",
+        "n_estimators": 160,
+        "max_depth": 18,
+        "min_samples_leaf": 2,
+        "seed": 42,
+        "threshold_rule": "validation F1 maximum over 0.05..0.95 step0.01; ties higher threshold",
+        "margin_rule": "validation absolute distance 10th percentile, clipped to [0.01,0.10]"
+      },
+      "training_rows": 161331,
+      "normal_reference_rows": 87005,
+      "app_guard_context": "75d73b7aecd2fa8791f3c469e0f66945913584f14d4de03d6fc24629cb30e786",
+      "classes": {
+        "rf": [
+          0,
+          1
+        ],
+        "lr": [
+          0,
+          1
+        ]
+      },
+      "pipeline_steps": {
+        "rf": [
+          "impute",
+          "classifier"
+        ],
+        "lr": [
+          "impute",
+          "log",
+          "scale",
+          "classifier"
+        ]
+      },
+      "classifier_dimensions": {
+        "rf": 79,
+        "lr": 79
+      },
+      "legacy_application_load_passed": true
+    }
+  },
+  "new_archive_members": [
+    {
+      "path": "app_model.py",
+      "bytes": 14754,
+      "sha256": "3335eb2a5c3cb62de9b403388ddd20fdcd10d68760bfb8416c9acc4daffdd742"
+    },
+    {
+      "path": "artifacts/model.joblib",
+      "bytes": 1476125,
+      "sha256": "40ee89927c853d4d0ada25f32b7ed464838562c3c0b2b52b737570d6d9d4bea6"
+    },
+    {
+      "path": "artifacts/model.json",
+      "bytes": 10690,
+      "sha256": "8eb8c09b5eaa7e77bd044051c0df4e4a5abc9bc5d35907be97161f5bc1caf30a"
+    },
+    {
+      "path": "feature_order.txt",
+      "bytes": 1138,
+      "sha256": "ded5356b5be0ae3294177fcac644d734ef8c8f53a4478e6266986ea9ddf18b27"
+    },
+    {
+      "path": "liushao/__init__.py",
+      "bytes": 50,
+      "sha256": "2544789cd348651ae9d8700db7922b2e4fe9b05630b379fa8b6b59f7391e36a2"
+    },
+    {
+      "path": "liushao/data.py",
+      "bytes": 9754,
+      "sha256": "c562599f49a7e01465b4b851d19e2e34f985eb78be59a9f219bf2bfb35ab07ac"
+    },
+    {
+      "path": "liushao/model.py",
+      "bytes": 6737,
+      "sha256": "1105d2f8d738acddb3f5930bf191d9910128fa8364d02564fed4f9d164e00a66"
+    },
+    {
+      "path": "manifest.json",
+      "bytes": 4464,
+      "sha256": "7d9bc2c9da7c8567ce604aa2eeefd70e813967e0d0f91ab8f8b70731f8a60b1e"
+    },
+    {
+      "path": "model_info.json",
+      "bytes": 2843,
+      "sha256": "7ce096c5ad3f08271a185364b37006e066f59f8594ad3b5dcb1a1626ce48c790"
+    },
+    {
+      "path": "requirements-lock.txt",
+      "bytes": 886,
+      "sha256": "7ec540bdbf014120206c272350007eb2745275d35341ead569e9ef17f5c483f4"
+    },
+    {
+      "path": "requirements.txt",
+      "bytes": 134,
+      "sha256": "b75a8d6b20b97290c7b16e7f311e411932b96e9afae5e895ac315b21c3b3ead2"
+    },
+    {
+      "path": "verification_reference.json",
+      "bytes": 670,
+      "sha256": "0fb2d6470452ea20d3fa63539ff17cd8c8dc185ca33ffed4668fc70d4b6c48e5"
+    },
+    {
+      "path": "verify_model.py",
+      "bytes": 3265,
+      "sha256": "4d9dc282b1c94a72212e6b6790feeec3555b8055b05fd9fa84aa56c5b7b60303"
+    },
+    {
+      "path": "说明.txt",
+      "bytes": 2610,
+      "sha256": "40c8afca48fd354b71314063dbdf66cdd40e499fb26b496c856303215242d3dd"
+    }
+  ],
+  "packages": {
+    "altair": "5.5.0",
+    "attrs": "26.1.0",
+    "blinker": "1.9.0",
+    "cachetools": "6.2.6",
+    "certifi": "2026.7.22",
+    "charset-normalizer": "3.5.2",
+    "click": "8.5.0",
+    "colorama": "0.4.6",
+    "gitdb": "4.0.12",
+    "GitPython": "3.2.1",
+    "greenlet": "3.5.6",
+    "idna": "3.20",
+    "iniconfig": "2.3.1",
+    "Jinja2": "3.1.6",
+    "joblib": "1.5.2",
+    "jsonschema": "4.26.0",
+    "jsonschema-specifications": "2025.9.1",
+    "MarkupSafe": "3.0.4",
+    "narwhals": "2.27.1",
+    "numpy": "2.2.6",
+    "packaging": "25.0",
+    "pandas": "2.3.3",
+    "pillow": "11.3.0",
+    "playwright": "1.55.0",
+    "pluggy": "1.7.0",
+    "protobuf": "6.33.6",
+    "psutil": "7.1.0",
+    "pyarrow": "26.0.0",
+    "pydeck": "0.9.3",
+    "pyee": "13.0.1",
+    "Pygments": "2.21.0",
+    "pytest": "8.4.2",
+    "python-dateutil": "2.9.0.post0",
+    "pytz": "2026.5",
+    "referencing": "0.37.0",
+    "requests": "2.34.2",
+    "rpds-py": "2026.9.1",
+    "scikit-learn": "1.7.2",
+    "scipy": "1.18.1",
+    "six": "1.17.0",
+    "smmap": "5.0.3",
+    "streamlit": "1.50.0",
+    "tenacity": "9.2.1",
+    "threadpoolctl": "3.7.0",
+    "toml": "0.10.2",
+    "tornado": "6.5.10",
+    "typing_extensions": "4.16.0",
+    "tzdata": "2026.5",
+    "urllib3": "2.8.0",
+    "watchdog": "6.0.0"
+  },
+  "reference_data": {
+    "data_version": "e946961bf545243c081c8995ae582b56c968bf35094d12c2e0a17d7bfea04b87",
+    "features_sha256": "fa0b563c6ed52d7bbd16858ef90c906d4b776df161287176f651dbe119f87069",
+    "manifest_sha256": "1c86e8b99a8f1b3502fde8c34f881ab94733bfc911d6514b9c8919fa19271b9b",
+    "summary_sha256": "a150035b18e7174c171bbc8792741dc959c9773598dfd8de29c5c0974818a7b8",
+    "baseline_summary_sha256": "23f673088fb6e867ddcedf3958025e2fc5b5bc4112a10b838b7b76fbb43260e8"
+  },
+  "app_demo_checks": {
+    "original": {
+      "rows": 1000,
+      "rejected": 0,
+      "label_absent": true
+    },
+    "rebuilt": {
+      "rows": 1000,
+      "rejected": 0,
+      "label_absent": true
+    }
+  },
+  "original_test": {
+    "all": {
+      "label_support": {
+        "Benign": 13532,
+        "Bot": 1986,
+        "DoS attacks-SlowHTTPTest": 1
+      },
+      "models": {
+        "original": {
+          "metrics": {
+            "rf": {
+              "precision": 0.9725893294175233,
+              "recall": 1.0,
+              "f1": 0.9861042183622829,
+              "fpr": 0.004138338752586462,
+              "tn": 13476,
+              "fp": 56,
+              "fn": 0,
+              "tp": 1987,
+              "normal_support": 13532,
+              "attack_support": 1987,
+              "threshold": 0.12
+            },
+            "lr": {
+              "precision": 0.9357277882797732,
+              "recall": 0.9964771011575239,
+              "f1": 0.9651474530831099,
+              "fpr": 0.010050251256281407,
+              "tn": 13396,
+              "fp": 136,
+              "fn": 7,
+              "tp": 1980,
+              "normal_support": 13532,
+              "attack_support": 1987,
+              "threshold": 0.84
+            }
+          },
+          "review": {
+            "population": 15519,
+            "rf_errors": 56,
+            "rf_fp": 56,
+            "rf_fn": 0,
+            "sets": {
+              "disagreement": {
+                "records": 175,
+                "errors": 44,
+                "fp": 44,
+                "fn": 0,
+                "error_fraction": 0.25142857142857145,
+                "workload_fraction": 0.011276499774470004,
+                "fp_coverage": 0.7857142857142857,
+                "fn_coverage": null
+              },
+              "near_threshold": {
+                "records": 189,
+                "errors": 29,
+                "fp": 29,
+                "fn": 0,
+                "error_fraction": 0.15343915343915343,
+                "workload_fraction": 0.012178619756427604,
+                "fp_coverage": 0.5178571428571429,
+                "fn_coverage": null
+              },
+              "union": {
+                "records": 322,
+                "errors": 51,
+                "fp": 51,
+                "fn": 0,
+                "error_fraction": 0.15838509316770186,
+                "workload_fraction": 0.02074875958502481,
+                "fp_coverage": 0.9107142857142857,
+                "fn_coverage": null
+              }
+            },
+            "budgets": {
+              "union": [
+                {
+                  "k": 20,
+                  "reviewed": 20,
+                  "hint_records": 20,
+                  "errors_found": 13,
+                  "fp_found": 13,
+                  "fn_found": 0
+                },
+                {
+                  "k": 50,
+                  "reviewed": 50,
+                  "hint_records": 50,
+                  "errors_found": 22,
+                  "fp_found": 22,
+                  "fn_found": 0
+                },
+                {
+                  "k": 100,
+                  "reviewed": 100,
+                  "hint_records": 100,
+                  "errors_found": 22,
+                  "fp_found": 22,
+                  "fn_found": 0
+                }
+              ],
+              "disagreement": [
+                {
+                  "k": 20,
+                  "reviewed": 20,
+                  "hint_records": 20,
+                  "errors_found": 13,
+                  "fp_found": 13,
+                  "fn_found": 0
+                },
+                {
+                  "k": 50,
+                  "reviewed": 50,
+                  "hint_records": 50,
+                  "errors_found": 22,
+                  "fp_found": 22,
+                  "fn_found": 0
+                },
+                {
+                  "k": 100,
+                  "reviewed": 100,
+                  "hint_records": 100,
+                  "errors_found": 22,
+                  "fp_found": 22,
+                  "fn_found": 0
+                }
+              ],
+              "near_threshold": [
+                {
+                  "k": 20,
+                  "reviewed": 20,
+                  "hint_records": 20,
+                  "errors_found": 5,
+                  "fp_found": 5,
+                  "fn_found": 0
+                },
+                {
+                  "k": 50,
+                  "reviewed": 50,
+                  "hint_records": 50,
+                  "errors_found": 17,
+                  "fp_found": 17,
+                  "fn_found": 0
+                },
+                {
+                  "k": 100,
+                  "reviewed": 100,
+                  "hint_records": 100,
+                  "errors_found": 26,
+                  "fp_found": 26,
+                  "fn_found": 0
+                }
+              ],
+              "rf_half_centrality": [
+                {
+                  "k": 20,
+                  "reviewed": 20,
+                  "hint_records": null,
+                  "errors_found": 19,
+                  "fp_found": 19,
+                  "fn_found": 0
+                },
+                {
+                  "k": 50,
+                  "reviewed": 50,
+                  "hint_records": null,
+                  "errors_found": 43,
+                  "fp_found": 43,
+                  "fn_found": 0
+                },
+                {
+                  "k": 100,
+                  "reviewed": 100,
+                  "hint_records": null,
+                  "errors_found": 54,
+                  "fp_found": 54,
+                  "fn_found": 0
+                }
+              ],
+              "rf_threshold_distance": [
+                {
+                  "k": 20,
+                  "reviewed": 20,
+                  "hint_records": null,
+                  "errors_found": 5,
+                  "fp_found": 5,
+                  "fn_found": 0
+                },
+                {
+                  "k": 50,
+                  "reviewed": 50,
+                  "hint_records": null,
+                  "errors_found": 17,
+                  "fp_found": 17,
+                  "fn_found": 0
+                },
+                {
+                  "k": 100,
+                  "reviewed": 100,
+                  "hint_records": null,
+                  "errors_found": 26,
+                  "fp_found": 26,
+                  "fn_found": 0
+                }
+              ]
+            },
+            "random_expected_errors": {
+              "20": 0.07216959855660803,
+              "50": 0.18042399639152007,
+              "100": 0.36084799278304014
+            }
+          }
+        },
+        "rebuilt": {
+          "metrics": {
+            "rf": {
+              "precision": 0.9725893294175233,
+              "recall": 1.0,
+              "f1": 0.9861042183622829,
+              "fpr": 0.004138338752586462,
+              "tn": 13476,
+              "fp": 56,
+              "fn": 0,
+              "tp": 1987,
+              "normal_support": 13532,
+              "attack_support": 1987,
+              "threshold": 0.12
+            },
+            "lr": {
+              "precision": 0.9388335704125178,
+              "recall": 0.9964771011575239,
+              "f1": 0.966796875,
+              "fpr": 0.0095329589122081,
+              "tn": 13403,
+              "fp": 129,
+              "fn": 7,
+              "tp": 1980,
+              "normal_support": 13532,
+              "attack_support": 1987,
+              "threshold": 0.8499999999999999
+            }
+          },
+          "review": {
+            "population": 15519,
+            "rf_errors": 56,
+            "rf_fp": 56,
+            "rf_fn": 0,
+            "sets": {
+              "disagreement": {
+                "records": 172,
+                "errors": 46,
+                "fp": 46,
+                "fn": 0,
+                "error_fraction": 0.26744186046511625,
+                "workload_fraction": 0.011083188349764805,
+                "fp_coverage": 0.8214285714285714,
+                "fn_coverage": null
+              },
+              "near_threshold": {
+                "records": 189,
+                "errors": 29,
+                "fp": 29,
+                "fn": 0,
+                "error_fraction": 0.15343915343915343,
+                "workload_fraction": 0.012178619756427604,
+                "fp_coverage": 0.5178571428571429,
+                "fn_coverage": null
+              },
+              "union": {
+                "records": 321,
+                "errors": 52,
+                "fp": 52,
+                "fn": 0,
+                "error_fraction": 0.16199376947040497,
+                "workload_fraction": 0.02068432244345641,
+                "fp_coverage": 0.9285714285714286,
+                "fn_coverage": null
+              }
+            },
+            "budgets": {
+              "union": [
+                {
+                  "k": 20,
+                  "reviewed": 20,
+                  "hint_records": 20,
+                  "errors_found": 13,
+                  "fp_found": 13,
+                  "fn_found": 0
+                },
+                {
+                  "k": 50,
+                  "reviewed": 50,
+                  "hint_records": 50,
+                  "errors_found": 24,
+                  "fp_found": 24,
+                  "fn_found": 0
+                },
+                {
+                  "k": 100,
+                  "reviewed": 100,
+                  "hint_records": 100,
+                  "errors_found": 24,
+                  "fp_found": 24,
+                  "fn_found": 0
+                }
+              ],
+              "disagreement": [
+                {
+                  "k": 20,
+                  "reviewed": 20,
+                  "hint_records": 20,
+                  "errors_found": 13,
+                  "fp_found": 13,
+                  "fn_found": 0
+                },
+                {
+                  "k": 50,
+                  "reviewed": 50,
+                  "hint_records": 50,
+                  "errors_found": 24,
+                  "fp_found": 24,
+                  "fn_found": 0
+                },
+                {
+                  "k": 100,
+                  "reviewed": 100,
+                  "hint_records": 100,
+                  "errors_found": 24,
+                  "fp_found": 24,
+                  "fn_found": 0
+                }
+              ],
+              "near_threshold": [
+                {
+                  "k": 20,
+                  "reviewed": 20,
+                  "hint_records": 20,
+                  "errors_found": 5,
+                  "fp_found": 5,
+                  "fn_found": 0
+                },
+                {
+                  "k": 50,
+                  "reviewed": 50,
+                  "hint_records": 50,
+                  "errors_found": 17,
+                  "fp_found": 17,
+                  "fn_found": 0
+                },
+                {
+                  "k": 100,
+                  "reviewed": 100,
+                  "hint_records": 100,
+                  "errors_found": 26,
+                  "fp_found": 26,
+                  "fn_found": 0
+                }
+              ],
+              "rf_half_centrality": [
+                {
+                  "k": 20,
+                  "reviewed": 20,
+                  "hint_records": null,
+                  "errors_found": 19,
+                  "fp_found": 19,
+                  "fn_found": 0
+                },
+                {
+                  "k": 50,
+                  "reviewed": 50,
+                  "hint_records": null,
+                  "errors_found": 43,
+                  "fp_found": 43,
+                  "fn_found": 0
+                },
+                {
+                  "k": 100,
+                  "reviewed": 100,
+                  "hint_records": null,
+                  "errors_found": 54,
+                  "fp_found": 54,
+                  "fn_found": 0
+                }
+              ],
+              "rf_threshold_distance": [
+                {
+                  "k": 20,
+                  "reviewed": 20,
+                  "hint_records": null,
+                  "errors_found": 5,
+                  "fp_found": 5,
+                  "fn_found": 0
+                },
+                {
+                  "k": 50,
+                  "reviewed": 50,
+                  "hint_records": null,
+                  "errors_found": 17,
+                  "fp_found": 17,
+                  "fn_found": 0
+                },
+                {
+                  "k": 100,
+                  "reviewed": 100,
+                  "hint_records": null,
+                  "errors_found": 26,
+                  "fp_found": 26,
+                  "fn_found": 0
+                }
+              ]
+            },
+            "random_expected_errors": {
+              "20": 0.07216959855660803,
+              "50": 0.18042399639152007,
+              "100": 0.36084799278304014
+            }
+          }
+        }
+      }
+    }
+  },
+  "pipeline_seconds_15519_rows_5_warm_alternating_runs": {
+    "original": {
+      "rf": [
+        0.05562709999503568,
+        0.05405829999654088,
+        0.041799600003287196,
+        0.040282500005559996,
+        0.04001689999131486
+      ],
+      "lr": [
+        0.03351029999612365,
+        0.028004300009342842,
+        0.024830399997881614,
+        0.024868200009223074,
+        0.024668199999723583
+      ]
+    },
+    "rebuilt": {
+      "rf": [
+        0.05251729999145027,
+        0.05421609999029897,
+        0.04029250000894535,
+        0.041033000001334585,
+        0.05111369999940507
+      ],
+      "lr": [
+        0.0295001000049524,
+        0.02985560000524856,
+        0.02630059998773504,
+        0.0246400000032736,
+        0.024278099997900426
+      ]
+    }
+  },
+  "paired_original_test_differences": {
+    "rf": {
+      "max_absolute_score_difference": 2.220446049250313e-16,
+      "decision_difference_rows": 0
+    },
+    "lr": {
+      "max_absolute_score_difference": 0.20654156102915128,
+      "decision_difference_rows": 9
+    }
+  },
+  "training_provenance_scope": "Original frozen hashes verified; rebuilt data version/source and split provenance from A report, descriptor and same reference hashes, not independent observation of training.",
+  "scope": "Descriptive paired comparison. No retuning, independent training-process proof, deployment claim or model selection based on these scores.",
+  "training_executed": false,
+  "external": {
+    "source_sha256": "fa2947a8256d81ee9103ae16139d62d0e17aa23e696ee80d9e76fb51c01c9c4b",
+    "source_bytes": 375945899,
+    "source_label_support": {
+      "Benign": 996077,
+      "DoS attacks-GoldenEye": 41508,
+      "DoS attacks-Slowloris": 10990
+    },
+    "timestamp_dates": {
+      "2018-02-15": 1048575
+    },
+    "audit_quality": {
+      "raw_rows": 1048575,
+      "valid_rows": 1048575,
+      "unjudgeable_rows": 0,
+      "missing_cells": 16054,
+      "rows_with_missing_features": 8027,
+      "record_id_overlap": 0,
+      "invalid_timestamp_rows": 0
+    },
+    "data_audit_sha256": "c6030378ef271703eb94cb294fe86eb0a80c149323acc3af84a2a5e5ee16a9d8",
+    "data_audit_completed_before_external_inference": true,
+    "strata": {
+      "all": {
+        "label_support": {
+          "Benign": 996077,
+          "DoS attacks-GoldenEye": 41508,
+          "DoS attacks-Slowloris": 10990
+        },
+        "models": {
+          "original": {
+            "metrics": {
+              "rf": {
+                "precision": 0.7232761464863081,
+                "recall": 0.5011048039925331,
+                "f1": 0.592033307077754,
+                "fpr": 0.010104640504699938,
+                "tn": 986012,
+                "fp": 10065,
+                "fn": 26191,
+                "tp": 26307,
+                "normal_support": 996077,
+                "attack_support": 52498,
+                "threshold": 0.12
+              },
+              "lr": {
+                "precision": 0.4517520215633423,
+                "recall": 0.36713779572555144,
+                "f1": 0.40507340037619666,
+                "fpr": 0.023483124296615622,
+                "tn": 972686,
+                "fp": 23391,
+                "fn": 33224,
+                "tp": 19274,
+                "normal_support": 996077,
+                "attack_support": 52498,
+                "threshold": 0.84
+              }
+            },
+            "review": {
+              "population": 1048575,
+              "rf_errors": 36256,
+              "rf_fp": 10065,
+              "rf_fn": 26191,
+              "sets": {
+                "disagreement": {
+                  "records": 54831,
+                  "errors": 17236,
+                  "fp": 8084,
+                  "fn": 9152,
+                  "error_fraction": 0.31434772300341046,
+                  "workload_fraction": 0.052290966311422646,
+                  "fp_coverage": 0.8031793343268753,
+                  "fn_coverage": 0.3494330113397732
+                },
+                "near_threshold": {
+                  "records": 64752,
+                  "errors": 27922,
+                  "fp": 4060,
+                  "fn": 23862,
+                  "error_fraction": 0.4312144798616259,
+                  "workload_fraction": 0.06175237822759459,
+                  "fp_coverage": 0.40337804272230504,
+                  "fn_coverage": 0.9110763239280669
+                },
+                "union": {
+                  "records": 93036,
+                  "errors": 33112,
+                  "fp": 9249,
+                  "fn": 23863,
+                  "error_fraction": 0.35590524098198545,
+                  "workload_fraction": 0.08872612831700165,
+                  "fp_coverage": 0.9189269746646795,
+                  "fn_coverage": 0.9111145049826276
+                }
+              },
+              "budgets": {
+                "union": [
+                  {
+                    "k": 20,
+                    "reviewed": 20,
+                    "hint_records": 20,
+                    "errors_found": 20,
+                    "fp_found": 20,
+                    "fn_found": 0
+                  },
+                  {
+                    "k": 50,
+                    "reviewed": 50,
+                    "hint_records": 50,
+                    "errors_found": 49,
+                    "fp_found": 49,
+                    "fn_found": 0
+                  },
+                  {
+                    "k": 100,
+                    "reviewed": 100,
+                    "hint_records": 100,
+                    "errors_found": 99,
+                    "fp_found": 99,
+                    "fn_found": 0
+                  }
+                ],
+                "disagreement": [
+                  {
+                    "k": 20,
+                    "reviewed": 20,
+                    "hint_records": 20,
+                    "errors_found": 20,
+                    "fp_found": 20,
+                    "fn_found": 0
+                  },
+                  {
+                    "k": 50,
+                    "reviewed": 50,
+                    "hint_records": 50,
+                    "errors_found": 49,
+                    "fp_found": 49,
+                    "fn_found": 0
+                  },
+                  {
+                    "k": 100,
+                    "reviewed": 100,
+                    "hint_records": 100,
+                    "errors_found": 99,
+                    "fp_found": 99,
+                    "fn_found": 0
+                  }
+                ],
+                "near_threshold": [
+                  {
+                    "k": 20,
+                    "reviewed": 20,
+                    "hint_records": 20,
+                    "errors_found": 17,
+                    "fp_found": 1,
+                    "fn_found": 16
+                  },
+                  {
+                    "k": 50,
+                    "reviewed": 50,
+                    "hint_records": 50,
+                    "errors_found": 45,
+                    "fp_found": 29,
+                    "fn_found": 16
+                  },
+                  {
+                    "k": 100,
+                    "reviewed": 100,
+                    "hint_records": 100,
+                    "errors_found": 93,
+                    "fp_found": 77,
+                    "fn_found": 16
+                  }
+                ],
+                "rf_half_centrality": [
+                  {
+                    "k": 20,
+                    "reviewed": 20,
+                    "hint_records": null,
+                    "errors_found": 0,
+                    "fp_found": 0,
+                    "fn_found": 0
+                  },
+                  {
+                    "k": 50,
+                    "reviewed": 50,
+                    "hint_records": null,
+                    "errors_found": 4,
+                    "fp_found": 4,
+                    "fn_found": 0
+                  },
+                  {
+                    "k": 100,
+                    "reviewed": 100,
+                    "hint_records": null,
+                    "errors_found": 4,
+                    "fp_found": 4,
+                    "fn_found": 0
+                  }
+                ],
+                "rf_threshold_distance": [
+                  {
+                    "k": 20,
+                    "reviewed": 20,
+                    "hint_records": null,
+                    "errors_found": 17,
+                    "fp_found": 1,
+                    "fn_found": 16
+                  },
+                  {
+                    "k": 50,
+                    "reviewed": 50,
+                    "hint_records": null,
+                    "errors_found": 45,
+                    "fp_found": 29,
+                    "fn_found": 16
+                  },
+                  {
+                    "k": 100,
+                    "reviewed": 100,
+                    "hint_records": null,
+                    "errors_found": 93,
+                    "fp_found": 77,
+                    "fn_found": 16
+                  }
+                ]
+              },
+              "random_expected_errors": {
+                "20": 0.6915289798059271,
+                "50": 1.7288224495148177,
+                "100": 3.4576448990296353
+              }
+            }
+          },
+          "rebuilt": {
+            "metrics": {
+              "rf": {
+                "precision": 0.7232761464863081,
+                "recall": 0.5011048039925331,
+                "f1": 0.592033307077754,
+                "fpr": 0.010104640504699938,
+                "tn": 986012,
+                "fp": 10065,
+                "fn": 26191,
+                "tp": 26307,
+                "normal_support": 996077,
+                "attack_support": 52498,
+                "threshold": 0.12
+              },
+              "lr": {
+                "precision": 0.46933939452558276,
+                "recall": 0.36972837060459446,
+                "f1": 0.4136211562639845,
+                "fpr": 0.022032433235583192,
+                "tn": 974131,
+                "fp": 21946,
+                "fn": 33088,
+                "tp": 19410,
+                "normal_support": 996077,
+                "attack_support": 52498,
+                "threshold": 0.8499999999999999
+              }
+            },
+            "review": {
+              "population": 1048575,
+              "rf_errors": 36256,
+              "rf_fp": 10065,
+              "rf_fn": 26191,
+              "sets": {
+                "disagreement": {
+                  "records": 53464,
+                  "errors": 17343,
+                  "fp": 8183,
+                  "fn": 9160,
+                  "error_fraction": 0.3243865030674847,
+                  "workload_fraction": 0.05098729227761486,
+                  "fp_coverage": 0.8130153999006458,
+                  "fn_coverage": 0.349738459776259
+                },
+                "near_threshold": {
+                  "records": 64752,
+                  "errors": 27922,
+                  "fp": 4060,
+                  "fn": 23862,
+                  "error_fraction": 0.4312144798616259,
+                  "workload_fraction": 0.06175237822759459,
+                  "fp_coverage": 0.40337804272230504,
+                  "fn_coverage": 0.9110763239280669
+                },
+                "union": {
+                  "records": 92850,
+                  "errors": 33114,
+                  "fp": 9251,
+                  "fn": 23863,
+                  "error_fraction": 0.35663974151857836,
+                  "workload_fraction": 0.0885487447249839,
+                  "fp_coverage": 0.9191256830601093,
+                  "fn_coverage": 0.9111145049826276
+                }
+              },
+              "budgets": {
+                "union": [
+                  {
+                    "k": 20,
+                    "reviewed": 20,
+                    "hint_records": 20,
+                    "errors_found": 20,
+                    "fp_found": 20,
+                    "fn_found": 0
+                  },
+                  {
+                    "k": 50,
+                    "reviewed": 50,
+                    "hint_records": 50,
+                    "errors_found": 49,
+                    "fp_found": 49,
+                    "fn_found": 0
+                  },
+                  {
+                    "k": 100,
+                    "reviewed": 100,
+                    "hint_records": 100,
+                    "errors_found": 99,
+                    "fp_found": 99,
+                    "fn_found": 0
+                  }
+                ],
+                "disagreement": [
+                  {
+                    "k": 20,
+                    "reviewed": 20,
+                    "hint_records": 20,
+                    "errors_found": 20,
+                    "fp_found": 20,
+                    "fn_found": 0
+                  },
+                  {
+                    "k": 50,
+                    "reviewed": 50,
+                    "hint_records": 50,
+                    "errors_found": 49,
+                    "fp_found": 49,
+                    "fn_found": 0
+                  },
+                  {
+                    "k": 100,
+                    "reviewed": 100,
+                    "hint_records": 100,
+                    "errors_found": 99,
+                    "fp_found": 99,
+                    "fn_found": 0
+                  }
+                ],
+                "near_threshold": [
+                  {
+                    "k": 20,
+                    "reviewed": 20,
+                    "hint_records": 20,
+                    "errors_found": 17,
+                    "fp_found": 1,
+                    "fn_found": 16
+                  },
+                  {
+                    "k": 50,
+                    "reviewed": 50,
+                    "hint_records": 50,
+                    "errors_found": 45,
+                    "fp_found": 29,
+                    "fn_found": 16
+                  },
+                  {
+                    "k": 100,
+                    "reviewed": 100,
+                    "hint_records": 100,
+                    "errors_found": 93,
+                    "fp_found": 77,
+                    "fn_found": 16
+                  }
+                ],
+                "rf_half_centrality": [
+                  {
+                    "k": 20,
+                    "reviewed": 20,
+                    "hint_records": null,
+                    "errors_found": 0,
+                    "fp_found": 0,
+                    "fn_found": 0
+                  },
+                  {
+                    "k": 50,
+                    "reviewed": 50,
+                    "hint_records": null,
+                    "errors_found": 4,
+                    "fp_found": 4,
+                    "fn_found": 0
+                  },
+                  {
+                    "k": 100,
+                    "reviewed": 100,
+                    "hint_records": null,
+                    "errors_found": 4,
+                    "fp_found": 4,
+                    "fn_found": 0
+                  }
+                ],
+                "rf_threshold_distance": [
+                  {
+                    "k": 20,
+                    "reviewed": 20,
+                    "hint_records": null,
+                    "errors_found": 17,
+                    "fp_found": 1,
+                    "fn_found": 16
+                  },
+                  {
+                    "k": 50,
+                    "reviewed": 50,
+                    "hint_records": null,
+                    "errors_found": 45,
+                    "fp_found": 29,
+                    "fn_found": 16
+                  },
+                  {
+                    "k": 100,
+                    "reviewed": 100,
+                    "hint_records": null,
+                    "errors_found": 93,
+                    "fp_found": 77,
+                    "fn_found": 16
+                  }
+                ]
+              },
+              "random_expected_errors": {
+                "20": 0.6915289798059271,
+                "50": 1.7288224495148177,
+                "100": 3.4576448990296353
+              }
+            }
+          }
+        }
+      },
+      "any_overlap": {
+        "label_support": {
+          "Benign": 136678,
+          "DoS attacks-GoldenEye": 0,
+          "DoS attacks-Slowloris": 76
+        },
+        "models": {
+          "original": {
+            "metrics": {
+              "rf": {
+                "precision": 0.0,
+                "recall": 0.0,
+                "f1": 0.0,
+                "fpr": 0.0066067691947497035,
+                "tn": 135775,
+                "fp": 903,
+                "fn": 76,
+                "tp": 0,
+                "normal_support": 136678,
+                "attack_support": 76,
+                "threshold": 0.12
+              },
+              "lr": {
+                "precision": 0.0,
+                "recall": 0.0,
+                "f1": 0.0,
+                "fpr": 0.011684396903671403,
+                "tn": 135081,
+                "fp": 1597,
+                "fn": 76,
+                "tp": 0,
+                "normal_support": 136678,
+                "attack_support": 76,
+                "threshold": 0.84
+              }
+            },
+            "review": {
+              "population": 136754,
+              "rf_errors": 979,
+              "rf_fp": 903,
+              "rf_fn": 76,
+              "sets": {
+                "disagreement": {
+                  "records": 2496,
+                  "errors": 901,
+                  "fp": 901,
+                  "fn": 0,
+                  "error_fraction": 0.3609775641025641,
+                  "workload_fraction": 0.018251751319888265,
+                  "fp_coverage": 0.9977851605758582,
+                  "fn_coverage": 0.0
+                },
+                "near_threshold": {
+                  "records": 1527,
+                  "errors": 56,
+                  "fp": 56,
+                  "fn": 0,
+                  "error_fraction": 0.0366732154551408,
+                  "workload_fraction": 0.011166035362768183,
+                  "fp_coverage": 0.06201550387596899,
+                  "fn_coverage": 0.0
+                },
+                "union": {
+                  "records": 3951,
+                  "errors": 901,
+                  "fp": 901,
+                  "fn": 0,
+                  "error_fraction": 0.22804353328271323,
+                  "workload_fraction": 0.02889129385612121,
+                  "fp_coverage": 0.9977851605758582,
+                  "fn_coverage": 0.0
+                }
+              },
+              "budgets": {
+                "union": [
+                  {
+                    "k": 20,
+                    "reviewed": 20,
+                    "hint_records": 20,
+                    "errors_found": 20,
+                    "fp_found": 20,
+                    "fn_found": 0
+                  },
+                  {
+                    "k": 50,
+                    "reviewed": 50,
+                    "hint_records": 50,
+                    "errors_found": 45,
+                    "fp_found": 45,
+                    "fn_found": 0
+                  },
+                  {
+                    "k": 100,
+                    "reviewed": 100,
+                    "hint_records": 100,
+                    "errors_found": 56,
+                    "fp_found": 56,
+                    "fn_found": 0
+                  }
+                ],
+                "disagreement": [
+                  {
+                    "k": 20,
+                    "reviewed": 20,
+                    "hint_records": 20,
+                    "errors_found": 20,
+                    "fp_found": 20,
+                    "fn_found": 0
+                  },
+                  {
+                    "k": 50,
+                    "reviewed": 50,
+                    "hint_records": 50,
+                    "errors_found": 45,
+                    "fp_found": 45,
+                    "fn_found": 0
+                  },
+                  {
+                    "k": 100,
+                    "reviewed": 100,
+                    "hint_records": 100,
+                    "errors_found": 56,
+                    "fp_found": 56,
+                    "fn_found": 0
+                  }
+                ],
+                "near_threshold": [
+                  {
+                    "k": 20,
+                    "reviewed": 20,
+                    "hint_records": 20,
+                    "errors_found": 6,
+                    "fp_found": 6,
+                    "fn_found": 0
+                  },
+                  {
+                    "k": 50,
+                    "reviewed": 50,
+                    "hint_records": 50,
+                    "errors_found": 6,
+                    "fp_found": 6,
+                    "fn_found": 0
+                  },
+                  {
+                    "k": 100,
+                    "reviewed": 100,
+                    "hint_records": 100,
+                    "errors_found": 13,
+                    "fp_found": 13,
+                    "fn_found": 0
+                  }
+                ],
+                "rf_half_centrality": [
+                  {
+                    "k": 20,
+                    "reviewed": 20,
+                    "hint_records": null,
+                    "errors_found": 20,
+                    "fp_found": 20,
+                    "fn_found": 0
+                  },
+                  {
+                    "k": 50,
+                    "reviewed": 50,
+                    "hint_records": null,
+                    "errors_found": 50,
+                    "fp_found": 50,
+                    "fn_found": 0
+                  },
+                  {
+                    "k": 100,
+                    "reviewed": 100,
+                    "hint_records": null,
+                    "errors_found": 100,
+                    "fp_found": 100,
+                    "fn_found": 0
+                  }
+                ],
+                "rf_threshold_distance": [
+                  {
+                    "k": 20,
+                    "reviewed": 20,
+                    "hint_records": null,
+                    "errors_found": 6,
+                    "fp_found": 6,
+                    "fn_found": 0
+                  },
+                  {
+                    "k": 50,
+                    "reviewed": 50,
+                    "hint_records": null,
+                    "errors_found": 6,
+                    "fp_found": 6,
+                    "fn_found": 0
+                  },
+                  {
+                    "k": 100,
+                    "reviewed": 100,
+                    "hint_records": null,
+                    "errors_found": 13,
+                    "fp_found": 13,
+                    "fn_found": 0
+                  }
+                ]
+              },
+              "random_expected_errors": {
+                "20": 0.14317679921611068,
+                "50": 0.3579419980402767,
+                "100": 0.7158839960805534
+              }
+            }
+          },
+          "rebuilt": {
+            "metrics": {
+              "rf": {
+                "precision": 0.0,
+                "recall": 0.0,
+                "f1": 0.0,
+                "fpr": 0.0066067691947497035,
+                "tn": 135775,
+                "fp": 903,
+                "fn": 76,
+                "tp": 0,
+                "normal_support": 136678,
+                "attack_support": 76,
+                "threshold": 0.12
+              },
+              "lr": {
+                "precision": 0.0,
+                "recall": 0.0,
+                "f1": 0.0,
+                "fpr": 0.011684396903671403,
+                "tn": 135081,
+                "fp": 1597,
+                "fn": 76,
+                "tp": 0,
+                "normal_support": 136678,
+                "attack_support": 76,
+                "threshold": 0.8499999999999999
+              }
+            },
+            "review": {
+              "population": 136754,
+              "rf_errors": 979,
+              "rf_fp": 903,
+              "rf_fn": 76,
+              "sets": {
+                "disagreement": {
+                  "records": 2496,
+                  "errors": 901,
+                  "fp": 901,
+                  "fn": 0,
+                  "error_fraction": 0.3609775641025641,
+                  "workload_fraction": 0.018251751319888265,
+                  "fp_coverage": 0.9977851605758582,
+                  "fn_coverage": 0.0
+                },
+                "near_threshold": {
+                  "records": 1527,
+                  "errors": 56,
+                  "fp": 56,
+                  "fn": 0,
+                  "error_fraction": 0.0366732154551408,
+                  "workload_fraction": 0.011166035362768183,
+                  "fp_coverage": 0.06201550387596899,
+                  "fn_coverage": 0.0
+                },
+                "union": {
+                  "records": 3951,
+                  "errors": 901,
+                  "fp": 901,
+                  "fn": 0,
+                  "error_fraction": 0.22804353328271323,
+                  "workload_fraction": 0.02889129385612121,
+                  "fp_coverage": 0.9977851605758582,
+                  "fn_coverage": 0.0
+                }
+              },
+              "budgets": {
+                "union": [
+                  {
+                    "k": 20,
+                    "reviewed": 20,
+                    "hint_records": 20,
+                    "errors_found": 20,
+                    "fp_found": 20,
+                    "fn_found": 0
+                  },
+                  {
+                    "k": 50,
+                    "reviewed": 50,
+                    "hint_records": 50,
+                    "errors_found": 45,
+                    "fp_found": 45,
+                    "fn_found": 0
+                  },
+                  {
+                    "k": 100,
+                    "reviewed": 100,
+                    "hint_records": 100,
+                    "errors_found": 56,
+                    "fp_found": 56,
+                    "fn_found": 0
+                  }
+                ],
+                "disagreement": [
+                  {
+                    "k": 20,
+                    "reviewed": 20,
+                    "hint_records": 20,
+                    "errors_found": 20,
+                    "fp_found": 20,
+                    "fn_found": 0
+                  },
+                  {
+                    "k": 50,
+                    "reviewed": 50,
+                    "hint_records": 50,
+                    "errors_found": 45,
+                    "fp_found": 45,
+                    "fn_found": 0
+                  },
+                  {
+                    "k": 100,
+                    "reviewed": 100,
+                    "hint_records": 100,
+                    "errors_found": 56,
+                    "fp_found": 56,
+                    "fn_found": 0
+                  }
+                ],
+                "near_threshold": [
+                  {
+                    "k": 20,
+                    "reviewed": 20,
+                    "hint_records": 20,
+                    "errors_found": 6,
+                    "fp_found": 6,
+                    "fn_found": 0
+                  },
+                  {
+                    "k": 50,
+                    "reviewed": 50,
+                    "hint_records": 50,
+                    "errors_found": 6,
+                    "fp_found": 6,
+                    "fn_found": 0
+                  },
+                  {
+                    "k": 100,
+                    "reviewed": 100,
+                    "hint_records": 100,
+                    "errors_found": 13,
+                    "fp_found": 13,
+                    "fn_found": 0
+                  }
+                ],
+                "rf_half_centrality": [
+                  {
+                    "k": 20,
+                    "reviewed": 20,
+                    "hint_records": null,
+                    "errors_found": 20,
+                    "fp_found": 20,
+                    "fn_found": 0
+                  },
+                  {
+                    "k": 50,
+                    "reviewed": 50,
+                    "hint_records": null,
+                    "errors_found": 50,
+                    "fp_found": 50,
+                    "fn_found": 0
+                  },
+                  {
+                    "k": 100,
+                    "reviewed": 100,
+                    "hint_records": null,
+                    "errors_found": 100,
+                    "fp_found": 100,
+                    "fn_found": 0
+                  }
+                ],
+                "rf_threshold_distance": [
+                  {
+                    "k": 20,
+                    "reviewed": 20,
+                    "hint_records": null,
+                    "errors_found": 6,
+                    "fp_found": 6,
+                    "fn_found": 0
+                  },
+                  {
+                    "k": 50,
+                    "reviewed": 50,
+                    "hint_records": null,
+                    "errors_found": 6,
+                    "fp_found": 6,
+                    "fn_found": 0
+                  },
+                  {
+                    "k": 100,
+                    "reviewed": 100,
+                    "hint_records": null,
+                    "errors_found": 13,
+                    "fp_found": 13,
+                    "fn_found": 0
+                  }
+                ]
+              },
+              "random_expected_errors": {
+                "20": 0.14317679921611068,
+                "50": 0.3579419980402767,
+                "100": 0.7158839960805534
+              }
+            }
+          }
+        }
+      },
+      "no_overlap": {
+        "label_support": {
+          "Benign": 859399,
+          "DoS attacks-GoldenEye": 41508,
+          "DoS attacks-Slowloris": 10914
+        },
+        "models": {
+          "original": {
+            "metrics": {
+              "rf": {
+                "precision": 0.7416899264146156,
+                "recall": 0.5018312922055626,
+                "f1": 0.5986278458545243,
+                "fpr": 0.010660938632695639,
+                "tn": 850237,
+                "fp": 9162,
+                "fn": 26115,
+                "tp": 26307,
+                "normal_support": 859399,
+                "attack_support": 52422,
+                "threshold": 0.12
+              },
+              "lr": {
+                "precision": 0.4693191779487679,
+                "recall": 0.36767006218763115,
+                "f1": 0.4123221734944914,
+                "fpr": 0.025359582685109013,
+                "tn": 837605,
+                "fp": 21794,
+                "fn": 33148,
+                "tp": 19274,
+                "normal_support": 859399,
+                "attack_support": 52422,
+                "threshold": 0.84
+              }
+            },
+            "review": {
+              "population": 911821,
+              "rf_errors": 35277,
+              "rf_fp": 9162,
+              "rf_fn": 26115,
+              "sets": {
+                "disagreement": {
+                  "records": 52335,
+                  "errors": 16335,
+                  "fp": 7183,
+                  "fn": 9152,
+                  "error_fraction": 0.31212381771281167,
+                  "workload_fraction": 0.0573961336709727,
+                  "fp_coverage": 0.7839991268282035,
+                  "fn_coverage": 0.3504499329887038
+                },
+                "near_threshold": {
+                  "records": 63225,
+                  "errors": 27866,
+                  "fp": 4004,
+                  "fn": 23862,
+                  "error_fraction": 0.44074337682878606,
+                  "workload_fraction": 0.06933926724653194,
+                  "fp_coverage": 0.43702248417376116,
+                  "fn_coverage": 0.9137277426766226
+                },
+                "union": {
+                  "records": 89085,
+                  "errors": 32211,
+                  "fp": 8348,
+                  "fn": 23863,
+                  "error_fraction": 0.36157602289947804,
+                  "workload_fraction": 0.09770009683918225,
+                  "fp_coverage": 0.9111547697009387,
+                  "fn_coverage": 0.913766034845874
+                }
+              },
+              "budgets": {
+                "union": [
+                  {
+                    "k": 20,
+                    "reviewed": 20,
+                    "hint_records": 20,
+                    "errors_found": 20,
+                    "fp_found": 20,
+                    "fn_found": 0
+                  },
+                  {
+                    "k": 50,
+                    "reviewed": 50,
+                    "hint_records": 50,
+                    "errors_found": 49,
+                    "fp_found": 49,
+                    "fn_found": 0
+                  },
+                  {
+                    "k": 100,
+                    "reviewed": 100,
+                    "hint_records": 100,
+                    "errors_found": 99,
+                    "fp_found": 99,
+                    "fn_found": 0
+                  }
+                ],
+                "disagreement": [
+                  {
+                    "k": 20,
+                    "reviewed": 20,
+                    "hint_records": 20,
+                    "errors_found": 20,
+                    "fp_found": 20,
+                    "fn_found": 0
+                  },
+                  {
+                    "k": 50,
+                    "reviewed": 50,
+                    "hint_records": 50,
+                    "errors_found": 49,
+                    "fp_found": 49,
+                    "fn_found": 0
+                  },
+                  {
+                    "k": 100,
+                    "reviewed": 100,
+                    "hint_records": 100,
+                    "errors_found": 99,
+                    "fp_found": 99,
+                    "fn_found": 0
+                  }
+                ],
+                "near_threshold": [
+                  {
+                    "k": 20,
+                    "reviewed": 20,
+                    "hint_records": 20,
+                    "errors_found": 17,
+                    "fp_found": 1,
+                    "fn_found": 16
+                  },
+                  {
+                    "k": 50,
+                    "reviewed": 50,
+                    "hint_records": 50,
+                    "errors_found": 45,
+                    "fp_found": 29,
+                    "fn_found": 16
+                  },
+                  {
+                    "k": 100,
+                    "reviewed": 100,
+                    "hint_records": 100,
+                    "errors_found": 93,
+                    "fp_found": 77,
+                    "fn_found": 16
+                  }
+                ],
+                "rf_half_centrality": [
+                  {
+                    "k": 20,
+                    "reviewed": 20,
+                    "hint_records": null,
+                    "errors_found": 0,
+                    "fp_found": 0,
+                    "fn_found": 0
+                  },
+                  {
+                    "k": 50,
+                    "reviewed": 50,
+                    "hint_records": null,
+                    "errors_found": 4,
+                    "fp_found": 4,
+                    "fn_found": 0
+                  },
+                  {
+                    "k": 100,
+                    "reviewed": 100,
+                    "hint_records": null,
+                    "errors_found": 4,
+                    "fp_found": 4,
+                    "fn_found": 0
+                  }
+                ],
+                "rf_threshold_distance": [
+                  {
+                    "k": 20,
+                    "reviewed": 20,
+                    "hint_records": null,
+                    "errors_found": 17,
+                    "fp_found": 1,
+                    "fn_found": 16
+                  },
+                  {
+                    "k": 50,
+                    "reviewed": 50,
+                    "hint_records": null,
+                    "errors_found": 45,
+                    "fp_found": 29,
+                    "fn_found": 16
+                  },
+                  {
+                    "k": 100,
+                    "reviewed": 100,
+                    "hint_records": null,
+                    "errors_found": 93,
+                    "fp_found": 77,
+                    "fn_found": 16
+                  }
+                ]
+              },
+              "random_expected_errors": {
+                "20": 0.7737702904407773,
+                "50": 1.9344257261019433,
+                "100": 3.8688514522038866
+              }
+            }
+          },
+          "rebuilt": {
+            "metrics": {
+              "rf": {
+                "precision": 0.7416899264146156,
+                "recall": 0.5018312922055626,
+                "f1": 0.5986278458545243,
+                "fpr": 0.010660938632695639,
+                "tn": 850237,
+                "fp": 9162,
+                "fn": 26115,
+                "tp": 26307,
+                "normal_support": 859399,
+                "attack_support": 52422,
+                "threshold": 0.12
+              },
+              "lr": {
+                "precision": 0.4881913529012299,
+                "recall": 0.3702643928121781,
+                "f1": 0.42112799817749863,
+                "fpr": 0.02367817509678275,
+                "tn": 839050,
+                "fp": 20349,
+                "fn": 33012,
+                "tp": 19410,
+                "normal_support": 859399,
+                "attack_support": 52422,
+                "threshold": 0.8499999999999999
+              }
+            },
+            "review": {
+              "population": 911821,
+              "rf_errors": 35277,
+              "rf_fp": 9162,
+              "rf_fn": 26115,
+              "sets": {
+                "disagreement": {
+                  "records": 50968,
+                  "errors": 16442,
+                  "fp": 7282,
+                  "fn": 9160,
+                  "error_fraction": 0.3225945691414221,
+                  "workload_fraction": 0.05589693591176338,
+                  "fp_coverage": 0.7948046278105217,
+                  "fn_coverage": 0.3507562703427149
+                },
+                "near_threshold": {
+                  "records": 63225,
+                  "errors": 27866,
+                  "fp": 4004,
+                  "fn": 23862,
+                  "error_fraction": 0.44074337682878606,
+                  "workload_fraction": 0.06933926724653194,
+                  "fp_coverage": 0.43702248417376116,
+                  "fn_coverage": 0.9137277426766226
+                },
+                "union": {
+                  "records": 88899,
+                  "errors": 32213,
+                  "fp": 8350,
+                  "fn": 23863,
+                  "error_fraction": 0.3623550321150969,
+                  "workload_fraction": 0.09749610943375947,
+                  "fp_coverage": 0.9113730626500764,
+                  "fn_coverage": 0.913766034845874
+                }
+              },
+              "budgets": {
+                "union": [
+                  {
+                    "k": 20,
+                    "reviewed": 20,
+                    "hint_records": 20,
+                    "errors_found": 20,
+                    "fp_found": 20,
+                    "fn_found": 0
+                  },
+                  {
+                    "k": 50,
+                    "reviewed": 50,
+                    "hint_records": 50,
+                    "errors_found": 49,
+                    "fp_found": 49,
+                    "fn_found": 0
+                  },
+                  {
+                    "k": 100,
+                    "reviewed": 100,
+                    "hint_records": 100,
+                    "errors_found": 99,
+                    "fp_found": 99,
+                    "fn_found": 0
+                  }
+                ],
+                "disagreement": [
+                  {
+                    "k": 20,
+                    "reviewed": 20,
+                    "hint_records": 20,
+                    "errors_found": 20,
+                    "fp_found": 20,
+                    "fn_found": 0
+                  },
+                  {
+                    "k": 50,
+                    "reviewed": 50,
+                    "hint_records": 50,
+                    "errors_found": 49,
+                    "fp_found": 49,
+                    "fn_found": 0
+                  },
+                  {
+                    "k": 100,
+                    "reviewed": 100,
+                    "hint_records": 100,
+                    "errors_found": 99,
+                    "fp_found": 99,
+                    "fn_found": 0
+                  }
+                ],
+                "near_threshold": [
+                  {
+                    "k": 20,
+                    "reviewed": 20,
+                    "hint_records": 20,
+                    "errors_found": 17,
+                    "fp_found": 1,
+                    "fn_found": 16
+                  },
+                  {
+                    "k": 50,
+                    "reviewed": 50,
+                    "hint_records": 50,
+                    "errors_found": 45,
+                    "fp_found": 29,
+                    "fn_found": 16
+                  },
+                  {
+                    "k": 100,
+                    "reviewed": 100,
+                    "hint_records": 100,
+                    "errors_found": 93,
+                    "fp_found": 77,
+                    "fn_found": 16
+                  }
+                ],
+                "rf_half_centrality": [
+                  {
+                    "k": 20,
+                    "reviewed": 20,
+                    "hint_records": null,
+                    "errors_found": 0,
+                    "fp_found": 0,
+                    "fn_found": 0
+                  },
+                  {
+                    "k": 50,
+                    "reviewed": 50,
+                    "hint_records": null,
+                    "errors_found": 4,
+                    "fp_found": 4,
+                    "fn_found": 0
+                  },
+                  {
+                    "k": 100,
+                    "reviewed": 100,
+                    "hint_records": null,
+                    "errors_found": 4,
+                    "fp_found": 4,
+                    "fn_found": 0
+                  }
+                ],
+                "rf_threshold_distance": [
+                  {
+                    "k": 20,
+                    "reviewed": 20,
+                    "hint_records": null,
+                    "errors_found": 17,
+                    "fp_found": 1,
+                    "fn_found": 16
+                  },
+                  {
+                    "k": 50,
+                    "reviewed": 50,
+                    "hint_records": null,
+                    "errors_found": 45,
+                    "fp_found": 29,
+                    "fn_found": 16
+                  },
+                  {
+                    "k": 100,
+                    "reviewed": 100,
+                    "hint_records": null,
+                    "errors_found": 93,
+                    "fp_found": 77,
+                    "fn_found": 16
+                  }
+                ]
+              },
+              "random_expected_errors": {
+                "20": 0.7737702904407773,
+                "50": 1.9344257261019433,
+                "100": 3.8688514522038866
+              }
+            }
+          }
+        }
+      },
+      "per_attack_vs_benign": {
+        "DoS attacks-GoldenEye": {
+          "label_support": {
+            "Benign": 996077,
+            "DoS attacks-GoldenEye": 41508,
+            "DoS attacks-Slowloris": 0
+          },
+          "models": {
+            "original": {
+              "metrics": {
+                "rf": {
+                  "precision": 0.7220150799569144,
+                  "recall": 0.6298063023995374,
+                  "f1": 0.6727658753136461,
+                  "fpr": 0.010104640504699938,
+                  "tn": 986012,
+                  "fp": 10065,
+                  "fn": 15366,
+                  "tp": 26142,
+                  "normal_support": 996077,
+                  "attack_support": 41508,
+                  "threshold": 0.12
+                },
+                "lr": {
+                  "precision": 0.4511216444527877,
+                  "recall": 0.46316372747422185,
+                  "f1": 0.45706338262564783,
+                  "fpr": 0.023483124296615622,
+                  "tn": 972686,
+                  "fp": 23391,
+                  "fn": 22283,
+                  "tp": 19225,
+                  "normal_support": 996077,
+                  "attack_support": 41508,
+                  "threshold": 0.84
+                }
+              },
+              "review": {
+                "population": 1037585,
+                "rf_errors": 25431,
+                "rf_fp": 10065,
+                "rf_fn": 15366,
+                "sets": {
+                  "disagreement": {
+                    "records": 54713,
+                    "errors": 17235,
+                    "fp": 8084,
+                    "fn": 9151,
+                    "error_fraction": 0.31500740226271634,
+                    "workload_fraction": 0.05273110154830689,
+                    "fp_coverage": 0.8031793343268753,
+                    "fn_coverage": 0.5955355980736692
+                  },
+                  "near_threshold": {
+                    "records": 56112,
+                    "errors": 19426,
+                    "fp": 4060,
+                    "fn": 15366,
+                    "error_fraction": 0.34620045623039636,
+                    "workload_fraction": 0.05407942481820766,
+                    "fp_coverage": 0.40337804272230504,
+                    "fn_coverage": 1.0
+                  },
+                  "union": {
+                    "records": 84374,
+                    "errors": 24615,
+                    "fp": 9249,
+                    "fn": 15366,
+                    "error_fraction": 0.29173679095455946,
+                    "workload_fraction": 0.08131767517841912,
+                    "fp_coverage": 0.9189269746646795,
+                    "fn_coverage": 1.0
+                  }
+                },
+                "budgets": {
+                  "union": [
+                    {
+                      "k": 20,
+                      "reviewed": 20,
+                      "hint_records": 20,
+                      "errors_found": 20,
+                      "fp_found": 20,
+                      "fn_found": 0
+                    },
+                    {
+                      "k": 50,
+                      "reviewed": 50,
+                      "hint_records": 50,
+                      "errors_found": 49,
+                      "fp_found": 49,
+                      "fn_found": 0
+                    },
+                    {
+                      "k": 100,
+                      "reviewed": 100,
+                      "hint_records": 100,
+                      "errors_found": 99,
+                      "fp_found": 99,
+                      "fn_found": 0
+                    }
+                  ],
+                  "disagreement": [
+                    {
+                      "k": 20,
+                      "reviewed": 20,
+                      "hint_records": 20,
+                      "errors_found": 20,
+                      "fp_found": 20,
+                      "fn_found": 0
+                    },
+                    {
+                      "k": 50,
+                      "reviewed": 50,
+                      "hint_records": 50,
+                      "errors_found": 49,
+                      "fp_found": 49,
+                      "fn_found": 0
+                    },
+                    {
+                      "k": 100,
+                      "reviewed": 100,
+                      "hint_records": 100,
+                      "errors_found": 99,
+                      "fp_found": 99,
+                      "fn_found": 0
+                    }
+                  ],
+                  "near_threshold": [
+                    {
+                      "k": 20,
+                      "reviewed": 20,
+                      "hint_records": 20,
+                      "errors_found": 17,
+                      "fp_found": 1,
+                      "fn_found": 16
+                    },
+                    {
+                      "k": 50,
+                      "reviewed": 50,
+                      "hint_records": 50,
+                      "errors_found": 45,
+                      "fp_found": 29,
+                      "fn_found": 16
+                    },
+                    {
+                      "k": 100,
+                      "reviewed": 100,
+                      "hint_records": 100,
+                      "errors_found": 93,
+                      "fp_found": 77,
+                      "fn_found": 16
+                    }
+                  ],
+                  "rf_half_centrality": [
+                    {
+                      "k": 20,
+                      "reviewed": 20,
+                      "hint_records": null,
+                      "errors_found": 0,
+                      "fp_found": 0,
+                      "fn_found": 0
+                    },
+                    {
+                      "k": 50,
+                      "reviewed": 50,
+                      "hint_records": null,
+                      "errors_found": 4,
+                      "fp_found": 4,
+                      "fn_found": 0
+                    },
+                    {
+                      "k": 100,
+                      "reviewed": 100,
+                      "hint_records": null,
+                      "errors_found": 4,
+                      "fp_found": 4,
+                      "fn_found": 0
+                    }
+                  ],
+                  "rf_threshold_distance": [
+                    {
+                      "k": 20,
+                      "reviewed": 20,
+                      "hint_records": null,
+                      "errors_found": 17,
+                      "fp_found": 1,
+                      "fn_found": 16
+                    },
+                    {
+                      "k": 50,
+                      "reviewed": 50,
+                      "hint_records": null,
+                      "errors_found": 45,
+                      "fp_found": 29,
+                      "fn_found": 16
+                    },
+                    {
+                      "k": 100,
+                      "reviewed": 100,
+                      "hint_records": null,
+                      "errors_found": 93,
+                      "fp_found": 77,
+                      "fn_found": 16
+                    }
+                  ]
+                },
+                "random_expected_errors": {
+                  "20": 0.4901959839434841,
+                  "50": 1.2254899598587103,
+                  "100": 2.4509799197174207
+                }
+              }
+            },
+            "rebuilt": {
+              "metrics": {
+                "rf": {
+                  "precision": 0.7220150799569144,
+                  "recall": 0.6298063023995374,
+                  "f1": 0.6727658753136461,
+                  "fpr": 0.010104640504699938,
+                  "tn": 986012,
+                  "fp": 10065,
+                  "fn": 15366,
+                  "tp": 26142,
+                  "normal_support": 996077,
+                  "attack_support": 41508,
+                  "threshold": 0.12
+                },
+                "lr": {
+                  "precision": 0.46870990389038175,
+                  "recall": 0.4664402042979667,
+                  "f1": 0.46757229970415987,
+                  "fpr": 0.022032433235583192,
+                  "tn": 974131,
+                  "fp": 21946,
+                  "fn": 22147,
+                  "tp": 19361,
+                  "normal_support": 996077,
+                  "attack_support": 41508,
+                  "threshold": 0.8499999999999999
+                }
+              },
+              "review": {
+                "population": 1037585,
+                "rf_errors": 25431,
+                "rf_fp": 10065,
+                "rf_fn": 15366,
+                "sets": {
+                  "disagreement": {
+                    "records": 53346,
+                    "errors": 17342,
+                    "fp": 8183,
+                    "fn": 9159,
+                    "error_fraction": 0.32508529224309224,
+                    "workload_fraction": 0.0514136191251801,
+                    "fp_coverage": 0.8130153999006458,
+                    "fn_coverage": 0.5960562280359235
+                  },
+                  "near_threshold": {
+                    "records": 56112,
+                    "errors": 19426,
+                    "fp": 4060,
+                    "fn": 15366,
+                    "error_fraction": 0.34620045623039636,
+                    "workload_fraction": 0.05407942481820766,
+                    "fp_coverage": 0.40337804272230504,
+                    "fn_coverage": 1.0
+                  },
+                  "union": {
+                    "records": 84188,
+                    "errors": 24617,
+                    "fp": 9251,
+                    "fn": 15366,
+                    "error_fraction": 0.29240509336247444,
+                    "workload_fraction": 0.08113841275654525,
+                    "fp_coverage": 0.9191256830601093,
+                    "fn_coverage": 1.0
+                  }
+                },
+                "budgets": {
+                  "union": [
+                    {
+                      "k": 20,
+                      "reviewed": 20,
+                      "hint_records": 20,
+                      "errors_found": 20,
+                      "fp_found": 20,
+                      "fn_found": 0
+                    },
+                    {
+                      "k": 50,
+                      "reviewed": 50,
+                      "hint_records": 50,
+                      "errors_found": 49,
+                      "fp_found": 49,
+                      "fn_found": 0
+                    },
+                    {
+                      "k": 100,
+                      "reviewed": 100,
+                      "hint_records": 100,
+                      "errors_found": 99,
+                      "fp_found": 99,
+                      "fn_found": 0
+                    }
+                  ],
+                  "disagreement": [
+                    {
+                      "k": 20,
+                      "reviewed": 20,
+                      "hint_records": 20,
+                      "errors_found": 20,
+                      "fp_found": 20,
+                      "fn_found": 0
+                    },
+                    {
+                      "k": 50,
+                      "reviewed": 50,
+                      "hint_records": 50,
+                      "errors_found": 49,
+                      "fp_found": 49,
+                      "fn_found": 0
+                    },
+                    {
+                      "k": 100,
+                      "reviewed": 100,
+                      "hint_records": 100,
+                      "errors_found": 99,
+                      "fp_found": 99,
+                      "fn_found": 0
+                    }
+                  ],
+                  "near_threshold": [
+                    {
+                      "k": 20,
+                      "reviewed": 20,
+                      "hint_records": 20,
+                      "errors_found": 17,
+                      "fp_found": 1,
+                      "fn_found": 16
+                    },
+                    {
+                      "k": 50,
+                      "reviewed": 50,
+                      "hint_records": 50,
+                      "errors_found": 45,
+                      "fp_found": 29,
+                      "fn_found": 16
+                    },
+                    {
+                      "k": 100,
+                      "reviewed": 100,
+                      "hint_records": 100,
+                      "errors_found": 93,
+                      "fp_found": 77,
+                      "fn_found": 16
+                    }
+                  ],
+                  "rf_half_centrality": [
+                    {
+                      "k": 20,
+                      "reviewed": 20,
+                      "hint_records": null,
+                      "errors_found": 0,
+                      "fp_found": 0,
+                      "fn_found": 0
+                    },
+                    {
+                      "k": 50,
+                      "reviewed": 50,
+                      "hint_records": null,
+                      "errors_found": 4,
+                      "fp_found": 4,
+                      "fn_found": 0
+                    },
+                    {
+                      "k": 100,
+                      "reviewed": 100,
+                      "hint_records": null,
+                      "errors_found": 4,
+                      "fp_found": 4,
+                      "fn_found": 0
+                    }
+                  ],
+                  "rf_threshold_distance": [
+                    {
+                      "k": 20,
+                      "reviewed": 20,
+                      "hint_records": null,
+                      "errors_found": 17,
+                      "fp_found": 1,
+                      "fn_found": 16
+                    },
+                    {
+                      "k": 50,
+                      "reviewed": 50,
+                      "hint_records": null,
+                      "errors_found": 45,
+                      "fp_found": 29,
+                      "fn_found": 16
+                    },
+                    {
+                      "k": 100,
+                      "reviewed": 100,
+                      "hint_records": null,
+                      "errors_found": 93,
+                      "fp_found": 77,
+                      "fn_found": 16
+                    }
+                  ]
+                },
+                "random_expected_errors": {
+                  "20": 0.4901959839434841,
+                  "50": 1.2254899598587103,
+                  "100": 2.4509799197174207
+                }
+              }
+            }
+          }
+        },
+        "DoS attacks-Slowloris": {
+          "label_support": {
+            "Benign": 996077,
+            "DoS attacks-GoldenEye": 0,
+            "DoS attacks-Slowloris": 10990
+          },
+          "models": {
+            "original": {
+              "metrics": {
+                "rf": {
+                  "precision": 0.016129032258064516,
+                  "recall": 0.015013648771610554,
+                  "f1": 0.015551366635249765,
+                  "fpr": 0.010104640504699938,
+                  "tn": 986012,
+                  "fp": 10065,
+                  "fn": 10825,
+                  "tp": 165,
+                  "normal_support": 996077,
+                  "attack_support": 10990,
+                  "threshold": 0.12
+                },
+                "lr": {
+                  "precision": 0.002090443686006826,
+                  "recall": 0.0044585987261146496,
+                  "f1": 0.0028463549230322393,
+                  "fpr": 0.023483124296615622,
+                  "tn": 972686,
+                  "fp": 23391,
+                  "fn": 10941,
+                  "tp": 49,
+                  "normal_support": 996077,
+                  "attack_support": 10990,
+                  "threshold": 0.84
+                }
+              },
+              "review": {
+                "population": 1007067,
+                "rf_errors": 20890,
+                "rf_fp": 10065,
+                "rf_fn": 10825,
+                "sets": {
+                  "disagreement": {
+                    "records": 29612,
+                    "errors": 8085,
+                    "fp": 8084,
+                    "fn": 1,
+                    "error_fraction": 0.2730312035661218,
+                    "workload_fraction": 0.029404200514960774,
+                    "fp_coverage": 0.8031793343268753,
+                    "fn_coverage": 9.237875288683603e-05
+                  },
+                  "near_threshold": {
+                    "records": 43121,
+                    "errors": 12556,
+                    "fp": 4060,
+                    "fn": 8496,
+                    "error_fraction": 0.29118063124695626,
+                    "workload_fraction": 0.04281840235058839,
+                    "fp_coverage": 0.40337804272230504,
+                    "fn_coverage": 0.7848498845265589
+                  },
+                  "union": {
+                    "records": 60604,
+                    "errors": 17746,
+                    "fp": 9249,
+                    "fn": 8497,
+                    "error_fraction": 0.29281895584449874,
+                    "workload_fraction": 0.06017871700691215,
+                    "fp_coverage": 0.9189269746646795,
+                    "fn_coverage": 0.7849422632794457
+                  }
+                },
+                "budgets": {
+                  "union": [
+                    {
+                      "k": 20,
+                      "reviewed": 20,
+                      "hint_records": 20,
+                      "errors_found": 20,
+                      "fp_found": 20,
+                      "fn_found": 0
+                    },
+                    {
+                      "k": 50,
+                      "reviewed": 50,
+                      "hint_records": 50,
+                      "errors_found": 49,
+                      "fp_found": 49,
+                      "fn_found": 0
+                    },
+                    {
+                      "k": 100,
+                      "reviewed": 100,
+                      "hint_records": 100,
+                      "errors_found": 99,
+                      "fp_found": 99,
+                      "fn_found": 0
+                    }
+                  ],
+                  "disagreement": [
+                    {
+                      "k": 20,
+                      "reviewed": 20,
+                      "hint_records": 20,
+                      "errors_found": 20,
+                      "fp_found": 20,
+                      "fn_found": 0
+                    },
+                    {
+                      "k": 50,
+                      "reviewed": 50,
+                      "hint_records": 50,
+                      "errors_found": 49,
+                      "fp_found": 49,
+                      "fn_found": 0
+                    },
+                    {
+                      "k": 100,
+                      "reviewed": 100,
+                      "hint_records": 100,
+                      "errors_found": 99,
+                      "fp_found": 99,
+                      "fn_found": 0
+                    }
+                  ],
+                  "near_threshold": [
+                    {
+                      "k": 20,
+                      "reviewed": 20,
+                      "hint_records": 20,
+                      "errors_found": 15,
+                      "fp_found": 15,
+                      "fn_found": 0
+                    },
+                    {
+                      "k": 50,
+                      "reviewed": 50,
+                      "hint_records": 50,
+                      "errors_found": 43,
+                      "fp_found": 43,
+                      "fn_found": 0
+                    },
+                    {
+                      "k": 100,
+                      "reviewed": 100,
+                      "hint_records": 100,
+                      "errors_found": 93,
+                      "fp_found": 93,
+                      "fn_found": 0
+                    }
+                  ],
+                  "rf_half_centrality": [
+                    {
+                      "k": 20,
+                      "reviewed": 20,
+                      "hint_records": null,
+                      "errors_found": 20,
+                      "fp_found": 20,
+                      "fn_found": 0
+                    },
+                    {
+                      "k": 50,
+                      "reviewed": 50,
+                      "hint_records": null,
+                      "errors_found": 50,
+                      "fp_found": 50,
+                      "fn_found": 0
+                    },
+                    {
+                      "k": 100,
+                      "reviewed": 100,
+                      "hint_records": null,
+                      "errors_found": 100,
+                      "fp_found": 100,
+                      "fn_found": 0
+                    }
+                  ],
+                  "rf_threshold_distance": [
+                    {
+                      "k": 20,
+                      "reviewed": 20,
+                      "hint_records": null,
+                      "errors_found": 15,
+                      "fp_found": 15,
+                      "fn_found": 0
+                    },
+                    {
+                      "k": 50,
+                      "reviewed": 50,
+                      "hint_records": null,
+                      "errors_found": 43,
+                      "fp_found": 43,
+                      "fn_found": 0
+                    },
+                    {
+                      "k": 100,
+                      "reviewed": 100,
+                      "hint_records": null,
+                      "errors_found": 93,
+                      "fp_found": 93,
+                      "fn_found": 0
+                    }
+                  ]
+                },
+                "random_expected_errors": {
+                  "20": 0.4148681269468665,
+                  "50": 1.0371703173671663,
+                  "100": 2.0743406347343325
+                }
+              }
+            },
+            "rebuilt": {
+              "metrics": {
+                "rf": {
+                  "precision": 0.016129032258064516,
+                  "recall": 0.015013648771610554,
+                  "f1": 0.015551366635249765,
+                  "fpr": 0.010104640504699938,
+                  "tn": 986012,
+                  "fp": 10065,
+                  "fn": 10825,
+                  "tp": 165,
+                  "normal_support": 996077,
+                  "attack_support": 10990,
+                  "threshold": 0.12
+                },
+                "lr": {
+                  "precision": 0.002227779040691066,
+                  "recall": 0.0044585987261146496,
+                  "f1": 0.002971047445808701,
+                  "fpr": 0.022032433235583192,
+                  "tn": 974131,
+                  "fp": 21946,
+                  "fn": 10941,
+                  "tp": 49,
+                  "normal_support": 996077,
+                  "attack_support": 10990,
+                  "threshold": 0.8499999999999999
+                }
+              },
+              "review": {
+                "population": 1007067,
+                "rf_errors": 20890,
+                "rf_fp": 10065,
+                "rf_fn": 10825,
+                "sets": {
+                  "disagreement": {
+                    "records": 28365,
+                    "errors": 8184,
+                    "fp": 8183,
+                    "fn": 1,
+                    "error_fraction": 0.28852459016393445,
+                    "workload_fraction": 0.028165951222709113,
+                    "fp_coverage": 0.8130153999006458,
+                    "fn_coverage": 9.237875288683603e-05
+                  },
+                  "near_threshold": {
+                    "records": 43121,
+                    "errors": 12556,
+                    "fp": 4060,
+                    "fn": 8496,
+                    "error_fraction": 0.29118063124695626,
+                    "workload_fraction": 0.04281840235058839,
+                    "fp_coverage": 0.40337804272230504,
+                    "fn_coverage": 0.7848498845265589
+                  },
+                  "union": {
+                    "records": 60259,
+                    "errors": 17748,
+                    "fp": 9251,
+                    "fn": 8497,
+                    "error_fraction": 0.29452861813173137,
+                    "workload_fraction": 0.0598361380126645,
+                    "fp_coverage": 0.9191256830601093,
+                    "fn_coverage": 0.7849422632794457
+                  }
+                },
+                "budgets": {
+                  "union": [
+                    {
+                      "k": 20,
+                      "reviewed": 20,
+                      "hint_records": 20,
+                      "errors_found": 20,
+                      "fp_found": 20,
+                      "fn_found": 0
+                    },
+                    {
+                      "k": 50,
+                      "reviewed": 50,
+                      "hint_records": 50,
+                      "errors_found": 49,
+                      "fp_found": 49,
+                      "fn_found": 0
+                    },
+                    {
+                      "k": 100,
+                      "reviewed": 100,
+                      "hint_records": 100,
+                      "errors_found": 99,
+                      "fp_found": 99,
+                      "fn_found": 0
+                    }
+                  ],
+                  "disagreement": [
+                    {
+                      "k": 20,
+                      "reviewed": 20,
+                      "hint_records": 20,
+                      "errors_found": 20,
+                      "fp_found": 20,
+                      "fn_found": 0
+                    },
+                    {
+                      "k": 50,
+                      "reviewed": 50,
+                      "hint_records": 50,
+                      "errors_found": 49,
+                      "fp_found": 49,
+                      "fn_found": 0
+                    },
+                    {
+                      "k": 100,
+                      "reviewed": 100,
+                      "hint_records": 100,
+                      "errors_found": 99,
+                      "fp_found": 99,
+                      "fn_found": 0
+                    }
+                  ],
+                  "near_threshold": [
+                    {
+                      "k": 20,
+                      "reviewed": 20,
+                      "hint_records": 20,
+                      "errors_found": 15,
+                      "fp_found": 15,
+                      "fn_found": 0
+                    },
+                    {
+                      "k": 50,
+                      "reviewed": 50,
+                      "hint_records": 50,
+                      "errors_found": 43,
+                      "fp_found": 43,
+                      "fn_found": 0
+                    },
+                    {
+                      "k": 100,
+                      "reviewed": 100,
+                      "hint_records": 100,
+                      "errors_found": 93,
+                      "fp_found": 93,
+                      "fn_found": 0
+                    }
+                  ],
+                  "rf_half_centrality": [
+                    {
+                      "k": 20,
+                      "reviewed": 20,
+                      "hint_records": null,
+                      "errors_found": 20,
+                      "fp_found": 20,
+                      "fn_found": 0
+                    },
+                    {
+                      "k": 50,
+                      "reviewed": 50,
+                      "hint_records": null,
+                      "errors_found": 50,
+                      "fp_found": 50,
+                      "fn_found": 0
+                    },
+                    {
+                      "k": 100,
+                      "reviewed": 100,
+                      "hint_records": null,
+                      "errors_found": 100,
+                      "fp_found": 100,
+                      "fn_found": 0
+                    }
+                  ],
+                  "rf_threshold_distance": [
+                    {
+                      "k": 20,
+                      "reviewed": 20,
+                      "hint_records": null,
+                      "errors_found": 15,
+                      "fp_found": 15,
+                      "fn_found": 0
+                    },
+                    {
+                      "k": 50,
+                      "reviewed": 50,
+                      "hint_records": null,
+                      "errors_found": 43,
+                      "fp_found": 43,
+                      "fn_found": 0
+                    },
+                    {
+                      "k": 100,
+                      "reviewed": 100,
+                      "hint_records": null,
+                      "errors_found": 93,
+                      "fp_found": 93,
+                      "fn_found": 0
+                    }
+                  ]
+                },
+                "random_expected_errors": {
+                  "20": 0.4148681269468665,
+                  "50": 1.0371703173671663,
+                  "100": 2.0743406347343325
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "infer_wall_seconds_including_cleaning": {
+      "original": 25.02994040005433,
+      "rebuilt": 24.91320900003484
+    }
+  },
+  "seconds": 236.4667468000116,
+  "finished_at_utc": "2026-10-16T14:28:46.593705+00:00",
+  "publication": {
+    "kind": "path-redacted-public-derivative",
+    "original_sha256": "08d94e2c5f30e63c64ffd0a1bebc8936bc7815fb4283a6c08043906a36ca52d2",
+    "changed_json_pointers": [
+      "/arguments/original_zip",
+      "/arguments/rebuilt_zip",
+      "/arguments/external_source",
+      "/arguments/output"
+    ],
+    "historical_evaluation_rerun": false,
+    "meaning": "仅替换本机绝对路径；历史指标及执行时间不改写，此文件不是原始字节。"
+  }
+}

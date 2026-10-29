@@ -1,0 +1,7 @@
+{
+  "csv_sha256": "c78db00f062b0760fe4786fef4ab091c55c6a0b352266c45c03cf7ccb820de0b",
+  "origins_sha256": "294a9a44ab8c00e8256361644eb302f08e48579f49050b4880657910d81bcbff",
+  "model_version": "c7a028b4e4cafedd",
+  "selection": "seed42 uniform1000 from held-out test",
+  "rows": 1000
+}

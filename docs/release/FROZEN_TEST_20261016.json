@@ -1,0 +1,181 @@
+{
+  "started_at_utc": "2026-10-16T09:40:10.905670+00:00",
+  "passed": true,
+  "git_head_at_execution": "714d9e95bc6491b84b5958d43a0d0661cbdedb21",
+  "script_sha256": "185ec25380f757a673387d4ad86963ed188fb368ac2eb0d1db7fb3c705f6e55e",
+  "model_version": "c7a028b4e4cafedd",
+  "model_sha256": "3c5b425f3a34454bd2b5a2738535742cc03e0f8f6e55fefc5abc5929c4dccad7",
+  "descriptor_sha256": "e280995a00084234c538720541db6475bb51382c4e2ffc9c0e4db8cbde933880",
+  "package_sha256": "c161dd8161321a4cc4bafb9df6dd70ae121f1c2452b85b206922e672e301998b",
+  "inner_package_sha256": "b50e021be5475fb9e8f87116b425fa270cf5969f897d28c16855028ed2dafd32",
+  "package_members": [
+    "README_先读.md",
+    "requirements-lock.txt",
+    "模型文件/liushao-frozen-c7a028b4e4cafedd.zip",
+    "交接文档/ACCEPTANCE.md",
+    "交接文档/FROZEN_MODEL_MANIFEST.json",
+    "交接文档/HANDOFF.md",
+    "交接文档/INTEGRATION_REVIEW.md",
+    "交接文档/INTEGRATION_SNAPSHOT.json",
+    "交接文档/INTERFACE.md",
+    "交接文档/PENDING_INTERFACE_CHANGES.md",
+    "交接文档/PR_13_SNAPSHOT.json",
+    "交接文档/PR_14_SNAPSHOT.json",
+    "交接文档/SOURCE_REPORT.json",
+    "交接文档/TRANSFER_PACKAGE.json",
+    "交接文档/VERIFICATION.json",
+    "SHA256SUMS.txt"
+  ],
+  "inner_members": [
+    "artifacts/model.joblib",
+    "artifacts/model.json",
+    "artifacts/demo.csv",
+    "artifacts/demo.json",
+    "artifacts/demo_origins.parquet",
+    "FROZEN_MODEL_MANIFEST.json"
+  ],
+  "data_version": "e946961bf545243c081c8995ae582b56c968bf35094d12c2e0a17d7bfea04b87",
+  "data_hashes": {
+    "features.parquet": "fa0b563c6ed52d7bbd16858ef90c906d4b776df161287176f651dbe119f87069",
+    "manifest.parquet": "1c86e8b99a8f1b3502fde8c34f881ab94733bfc911d6514b9c8919fa19271b9b"
+  },
+  "thresholds": {
+    "rf_threshold": 0.12,
+    "lr_threshold": 0.84,
+    "near_margin": 0.1
+  },
+  "pipelines": {
+    "rf": {
+      "steps": [
+        "impute",
+        "classifier"
+      ],
+      "classes": [
+        0,
+        1
+      ],
+      "input_features": 77,
+      "classifier_features": 79
+    },
+    "lr": {
+      "steps": [
+        "impute",
+        "log",
+        "scale",
+        "classifier"
+      ],
+      "classes": [
+        0,
+        1
+      ],
+      "input_features": 77,
+      "classifier_features": 79
+    }
+  },
+  "test_records": 15519,
+  "unjudgeable_records": 0,
+  "class_support": {
+    "Benign": 13532,
+    "Bot": 1986,
+    "DoS attacks-SlowHTTPTest": 1
+  },
+  "metrics": {
+    "rf": {
+      "precision": 0.9725893294175233,
+      "recall": 1.0,
+      "f1": 0.9861042183622829,
+      "fpr": 0.004138338752586462,
+      "tn": 13476,
+      "fp": 56,
+      "fn": 0,
+      "tp": 1987,
+      "normal_support": 13532,
+      "attack_support": 1987,
+      "threshold": 0.12
+    },
+    "lr": {
+      "precision": 0.9357277882797732,
+      "recall": 0.9964771011575239,
+      "f1": 0.9651474530831099,
+      "fpr": 0.010050251256281407,
+      "tn": 13396,
+      "fp": 136,
+      "fn": 7,
+      "tp": 1980,
+      "normal_support": 13532,
+      "attack_support": 1987,
+      "threshold": 0.84
+    }
+  },
+  "historical_metric_match": {
+    "rf": true,
+    "lr": true
+  },
+  "historical_flags_exact": {
+    "rf_anomaly": true,
+    "lr_anomaly": true,
+    "disagreement": true,
+    "near_threshold": true
+  },
+  "max_absolute_score_difference": {
+    "rf_score": 2.220446049250313e-16,
+    "lr_score": 0.0
+  },
+  "python": "3.12.14",
+  "installed_packages": {
+    "altair": "5.5.0",
+    "attrs": "26.1.0",
+    "blinker": "1.9.0",
+    "cachetools": "6.2.6",
+    "certifi": "2026.7.22",
+    "charset-normalizer": "3.5.2",
+    "click": "8.5.0",
+    "colorama": "0.4.6",
+    "gitdb": "4.0.12",
+    "GitPython": "3.2.1",
+    "greenlet": "3.5.6",
+    "idna": "3.20",
+    "iniconfig": "2.3.1",
+    "Jinja2": "3.1.6",
+    "joblib": "1.5.2",
+    "jsonschema": "4.26.0",
+    "jsonschema-specifications": "2025.9.1",
+    "MarkupSafe": "3.0.4",
+    "narwhals": "2.27.1",
+    "numpy": "2.2.6",
+    "packaging": "25.0",
+    "pandas": "2.3.3",
+    "pillow": "11.3.0",
+    "playwright": "1.55.0",
+    "pluggy": "1.7.0",
+    "protobuf": "6.33.6",
+    "psutil": "7.1.0",
+    "pyarrow": "26.0.0",
+    "pydeck": "0.9.3",
+    "pyee": "13.0.1",
+    "Pygments": "2.21.0",
+    "pytest": "8.4.2",
+    "python-dateutil": "2.9.0.post0",
+    "pytz": "2026.5",
+    "referencing": "0.37.0",
+    "requests": "2.34.2",
+    "rpds-py": "2026.9.1",
+    "scikit-learn": "1.7.2",
+    "scipy": "1.18.1",
+    "six": "1.17.0",
+    "smmap": "5.0.3",
+    "streamlit": "1.50.0",
+    "tenacity": "9.2.1",
+    "threadpoolctl": "3.7.0",
+    "toml": "0.10.2",
+    "tornado": "6.5.10",
+    "typing_extensions": "4.16.0",
+    "tzdata": "2026.5",
+    "urllib3": "2.8.0",
+    "watchdog": "6.0.0"
+  },
+  "protected_files_unchanged": 26,
+  "training_executed": false,
+  "scope": "Original held-out test only; same source/days, mainly Bot, no deployment or independent-scene claim.",
+  "finished_at_utc": "2026-10-16T09:40:11.570219+00:00"
+}

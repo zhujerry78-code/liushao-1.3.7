@@ -1,0 +1,143 @@
+{
+  "format": 1,
+  "status": "passed",
+  "training_executed": false,
+  "evaluated_at": "2026-10-24T14:42:03.625786+00:00",
+  "identity": {
+    "model_version": "c7a028b4e4cafedd",
+    "model_sha256": "3c5b425f3a34454bd2b5a2738535742cc03e0f8f6e55fefc5abc5929c4dccad7",
+    "descriptor_sha256": "dc973bc0771cb19750fb99bf98cf631eb92a5c4c33f20b22e19ef913e798ed7b",
+    "training_descriptor_sha256": "e280995a00084234c538720541db6475bb51382c4e2ffc9c0e4db8cbde933880",
+    "data_version": "e946961bf545243c081c8995ae582b56c968bf35094d12c2e0a17d7bfea04b87"
+  },
+  "data_hashes": {
+    "features.parquet": "fa0b563c6ed52d7bbd16858ef90c906d4b776df161287176f651dbe119f87069",
+    "manifest.parquet": "1c86e8b99a8f1b3502fde8c34f881ab94733bfc911d6514b9c8919fa19271b9b",
+    "rejected.csv": "e92bfc3faa22a3a439a56df8de5645380413dca8c4f8d7555d06dbb7223cbf6a"
+  },
+  "records": 15519,
+  "rejected": 0,
+  "class_support": {
+    "Benign": 13532,
+    "Bot": 1986,
+    "DoS attacks-SlowHTTPTest": 1
+  },
+  "metrics": {
+    "rf": {
+      "precision": 0.9725893294175233,
+      "recall": 1.0,
+      "f1": 0.9861042183622829,
+      "fpr": 0.004138338752586462,
+      "tn": 13476,
+      "fp": 56,
+      "fn": 0,
+      "tp": 1987,
+      "normal_support": 13532,
+      "attack_support": 1987,
+      "threshold": 0.12
+    },
+    "lr": {
+      "precision": 0.9357277882797732,
+      "recall": 0.9964771011575239,
+      "f1": 0.9651474530831099,
+      "fpr": 0.010050251256281407,
+      "tn": 13396,
+      "fp": 136,
+      "fn": 7,
+      "tp": 1980,
+      "normal_support": 13532,
+      "attack_support": 1987,
+      "threshold": 0.84
+    }
+  },
+  "intervals": {
+    "seed": 20261017,
+    "repetitions": 2000,
+    "blocks": 11,
+    "confidence": 0.95,
+    "method": "paired source-file/15-minute block percentile bootstrap with replacement",
+    "metrics": {
+      "rf": {
+        "precision": {
+          "lower": 0.9319740671750393,
+          "median": 0.9727697611189846,
+          "upper": 0.985122500057404,
+          "valid_replicates": 2000,
+          "undefined_replicates": 0
+        },
+        "recall": {
+          "lower": 1.0,
+          "median": 1.0,
+          "upper": 1.0,
+          "valid_replicates": 2000,
+          "undefined_replicates": 0
+        },
+        "f1": {
+          "lower": 0.9647894167118998,
+          "median": 0.9861969503824384,
+          "upper": 0.9925055002936597,
+          "valid_replicates": 2000,
+          "undefined_replicates": 0
+        },
+        "fpr": {
+          "lower": 0.0029217267770107517,
+          "median": 0.004160187616412398,
+          "upper": 0.005155669029556428,
+          "valid_replicates": 2000,
+          "undefined_replicates": 0
+        }
+      },
+      "lr": {
+        "precision": {
+          "lower": 0.8712151428905703,
+          "median": 0.9360103743329009,
+          "upper": 0.9555440886771926,
+          "valid_replicates": 2000,
+          "undefined_replicates": 0
+        },
+        "recall": {
+          "lower": 0.9938347718865598,
+          "median": 0.9964628600303184,
+          "upper": 0.9990000124937531,
+          "valid_replicates": 2000,
+          "undefined_replicates": 0
+        },
+        "f1": {
+          "lower": 0.9294579606586661,
+          "median": 0.9651532922105004,
+          "upper": 0.9750386285123127,
+          "valid_replicates": 2000,
+          "undefined_replicates": 0
+        },
+        "fpr": {
+          "lower": 0.007900501740629149,
+          "median": 0.00995828766655827,
+          "upper": 0.012309199429699389,
+          "valid_replicates": 2000,
+          "undefined_replicates": 0
+        }
+      }
+    }
+  },
+  "attack_blocks": 6,
+  "historical_comparison": "aggregate confusion matrices; matching historical per-record predictions unavailable",
+  "limits": [
+    "基于11个观察时间块的条件95%重采样区间，不是独立部署保证。",
+    "跨块相关性仍可能存在；零漏报导致的退化区间不保证未来100%召回。"
+  ],
+  "script_sha256": "cb4a5e2e53867949dcca61a8bbcd68c9be3ead2366466f2fdf78c324e2cc2326",
+  "python": "3.12.14",
+  "inference_parallel_backend": "sequential (fixed accumulation order; estimator parameters unchanged)",
+  "dependencies": {
+    "numpy": "2.2.6",
+    "pandas": "2.3.3",
+    "scikit-learn": "1.7.2",
+    "pyarrow": "26.0.0",
+    "joblib": "1.5.2"
+  },
+  "outputs": {
+    "test_predictions.csv": "f83034f564bc066dc46231e68456e11745d46b89c2a46e6bf74f55dd9168db5a",
+    "block_counts.json": "88e64a172688868374296832dea2c7f3f35f5a8c30b5c848e4e96ce5a0444b7d",
+    "intervals.json": "4eac21ebee33842a59b7ec951ffc0f5aa4be3a6c2613d2548b60a53ad8a4bb95"
+  }
+}

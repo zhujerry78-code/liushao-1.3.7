@@ -1,0 +1,177 @@
+{
+  "model_version": "c7a028b4e4cafedd",
+  "data_version": "e946961bf545243c081c8995ae582b56c968bf35094d12c2e0a17d7bfea04b87",
+  "rf": {
+    "precision": 0.9725893294175233,
+    "recall": 1.0,
+    "f1": 0.9861042183622829,
+    "fpr": 0.004138338752586462,
+    "tn": 13476,
+    "fp": 56,
+    "fn": 0,
+    "tp": 1987,
+    "normal_support": 13532,
+    "attack_support": 1987,
+    "threshold": 0.12
+  },
+  "lr": {
+    "precision": 0.9357277882797732,
+    "recall": 0.9964771011575239,
+    "f1": 0.9651474530831099,
+    "fpr": 0.010050251256281407,
+    "tn": 13396,
+    "fp": 136,
+    "fn": 7,
+    "tp": 1980,
+    "normal_support": 13532,
+    "attack_support": 1987,
+    "threshold": 0.84
+  },
+  "test_per_class": {
+    "Benign": {
+      "support": 13532,
+      "predicted_anomalies": 56
+    },
+    "Bot": {
+      "support": 1986,
+      "predicted_anomalies": 1986
+    },
+    "DoS attacks-SlowHTTPTest": {
+      "support": 1,
+      "predicted_anomalies": 1
+    }
+  },
+  "unjudgeable_test_rows": 0,
+  "ranking_original": [
+    {
+      "k_requested": 20,
+      "k_actual": 20,
+      "attacks_found": 9,
+      "precision_at_k": 0.45,
+      "recall_at_k": 0.004529441368897836,
+      "total_attacks": 1987
+    },
+    {
+      "k_requested": 50,
+      "k_actual": 50,
+      "attacks_found": 36,
+      "precision_at_k": 0.72,
+      "recall_at_k": 0.018117765475591345,
+      "total_attacks": 1987
+    },
+    {
+      "k_requested": 100,
+      "k_actual": 100,
+      "attacks_found": 77,
+      "precision_at_k": 0.77,
+      "recall_at_k": 0.038751887267237044,
+      "total_attacks": 1987
+    }
+  ],
+  "ranking_score": [
+    {
+      "k_requested": 20,
+      "k_actual": 20,
+      "attacks_found": 20,
+      "precision_at_k": 1.0,
+      "recall_at_k": 0.010065425264217413,
+      "total_attacks": 1987
+    },
+    {
+      "k_requested": 50,
+      "k_actual": 50,
+      "attacks_found": 50,
+      "precision_at_k": 1.0,
+      "recall_at_k": 0.025163563160543533,
+      "total_attacks": 1987
+    },
+    {
+      "k_requested": 100,
+      "k_actual": 100,
+      "attacks_found": 100,
+      "precision_at_k": 1.0,
+      "recall_at_k": 0.050327126321087066,
+      "total_attacks": 1987
+    }
+  ],
+  "review": {
+    "flagged": 322,
+    "errors_total": 56,
+    "errors_flagged": 51,
+    "error_rate_in_flags": 0.15838509316770186,
+    "missed_attacks_flagged": 0,
+    "false_alarms_flagged": 51,
+    "same_budget_error_discovery": [
+      {
+        "k_requested": 20,
+        "common_budget": 20,
+        "original": {
+          "k_actual": 20,
+          "errors_found": 1
+        },
+        "score": {
+          "k_actual": 20,
+          "errors_found": 0
+        },
+        "review": {
+          "k_actual": 20,
+          "errors_found": 13
+        }
+      },
+      {
+        "k_requested": 50,
+        "common_budget": 50,
+        "original": {
+          "k_actual": 50,
+          "errors_found": 1
+        },
+        "score": {
+          "k_actual": 50,
+          "errors_found": 0
+        },
+        "review": {
+          "k_actual": 50,
+          "errors_found": 22
+        }
+      },
+      {
+        "k_requested": 100,
+        "common_budget": 100,
+        "original": {
+          "k_actual": 100,
+          "errors_found": 1
+        },
+        "score": {
+          "k_actual": 100,
+          "errors_found": 0
+        },
+        "review": {
+          "k_actual": 100,
+          "errors_found": 22
+        }
+      }
+    ]
+  },
+  "timing": {
+    "fit_seconds": {
+      "rf": 4.166423999999097,
+      "lr": 3.563990800001193
+    },
+    "test_predict_seconds": 0.10389229999782401,
+    "total_seconds_including_reads_fit_save_eval": 8.593673300001683
+  },
+  "machine": {
+    "platform": "Windows-11-10.0.26300-SP0",
+    "python": "3.12.14",
+    "cpu": "AMD64 Family 25 Model 97 Stepping 2, AuthenticAMD",
+    "logical_cpus": 32,
+    "ram_bytes": 33605316608,
+    "process_rss_at_end_bytes": 759156736
+  },
+  "limitations": [
+    "same source and capture days; no deployment or cross-environment claim",
+    "Hulk has no test support; SlowHTTPTest has only one test record",
+    "review does not change classifier or automatically retrain",
+    "near-duplicate audit limited to six significant digit equality"
+  ]
+}

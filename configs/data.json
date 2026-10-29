@@ -1,0 +1,12 @@
+{
+  "seed": 42,
+  "sample_modulus": 10,
+  "chunk_rows": 50000,
+  "block_minutes": 15,
+  "source_page": "https://www.unb.ca/cic/datasets/ids-2018.html",
+  "base_url": "https://cse-cic-ids2018.s3.ca-central-1.amazonaws.com/Processed%20Traffic%20Data%20for%20ML%20Algorithms/",
+  "files": [
+    {"name": "Friday-16-02-2018_TrafficForML_CICFlowMeter.csv", "bytes": 333723605},
+    {"name": "Friday-02-03-2018_TrafficForML_CICFlowMeter.csv", "bytes": 352368373}
+  ]
+}
