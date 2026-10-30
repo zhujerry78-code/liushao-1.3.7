@@ -95,8 +95,9 @@ def run_browser(args, acceptance):
                                   'demo.csv': hashlib.sha256(content).hexdigest()},
               'input_sha256': hashlib.sha256(content).hexdigest(), 'input_rows': len(expected),
               'artifacts': str(artifacts), 'workspace': str(workspace),
-              'git_head': subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT,
-                                                  text=True).strip(),
+              'git_head': (acceptance.report['source_before']['head'] if (ROOT/'.git').exists() else None),
+              'source_identity': {'kind':'git-commit' if (ROOT/'.git').exists() else 'content-snapshot',
+                                  'value':acceptance.report['source_before']['head']},
               'source_sha256': {name: sha256(workspace / name) for name in
                                 ('app.py', 'app_model.py', 'app_quality.py', 'liushao/model.py',
                                  'liushao/data.py', 'liushao/reviews.py')},

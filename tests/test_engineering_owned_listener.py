@@ -84,6 +84,9 @@ def test_standard_browser_rejects_foreign_health_before_opening_the_page(
         engineering_browser.run_browser(args, acceptance)
     report = json.loads((output / 'report.json').read_text(encoding='utf-8'))
     assert report['passed'] is False and report['server_cleanup'][0]['passed']
+    assert report['source_identity']['value'] == acceptance.report['source_before']['head']
+    if not (engineering_browser.ROOT / '.git').exists():
+        assert report['git_head'] is None and report['source_identity']['kind'] == 'content-snapshot'
     assert foreign_health_listener[0].fileno() >= 0
 
 

@@ -32,7 +32,7 @@ REVISION_VERSIONS = {'r11-final': '1.3.0-rc.3',
                      'r11-whitebox-simple': '1.3.4',
                      'r11-whitebox-aligned': '1.3.5',
                      'r11-whitebox-refined': '1.3.6',
-                     'r12-engine': '1.3.7'}
+                     'r12-engine': '1.3.7', 'r13-contest': '1.3.7'}
 
 
 def package_bytes(root: Path, name: str) -> bytes:
@@ -51,11 +51,13 @@ def package_bytes(root: Path, name: str) -> bytes:
 
 def verify(root: Path = ROOT) -> dict:
     manifest = read_json(package_bytes(root, 'PACKAGE_MANIFEST.json'))
+    if manifest.get('package_kind') == 'source':
+        raise ValueError('这是独立源码包，不包含 Python、离线依赖及模型二进制；请使用完整运行包启动。')
     if not re.fullmatch(r'[0-9a-f]{40}', manifest.get('software_sha', '')):
         raise ValueError('Unexpected software baseline')
     files = manifest.get('files')
     revision = manifest.get('package_revision', '')
-    if not re.fullmatch(r'(?:r9(?:-[a-z0-9-]+)?|r10-competition|r11-final|r11-evidence-final|r11-ui-compact|r11-launch-fix|r11-review-guidance|r11-final-readable|r11-whitebox-polished|r11-whitebox-final|r11-whitebox-desktop|r11-whitebox-simple|r11-whitebox-aligned|r11-whitebox-refined|r12-engine)', revision):
+    if not re.fullmatch(r'(?:r9(?:-[a-z0-9-]+)?|r10-competition|r11-final|r11-evidence-final|r11-ui-compact|r11-launch-fix|r11-review-guidance|r11-final-readable|r11-whitebox-polished|r11-whitebox-final|r11-whitebox-desktop|r11-whitebox-simple|r11-whitebox-aligned|r11-whitebox-refined|r12-engine|r13-contest)', revision):
         raise ValueError('Unsupported package revision')
     required = {'app.py', 'app_types.py', 'app_service.py', 'SOURCE_MANIFEST.json', 'app_ui_state.py', 'app_ui_tools.py', 'app_triage.py', 'LICENSE', 'NOTICE', 'requirements-lock.txt', 'VERSION', 'artifacts/model.joblib',
                 'artifacts/model.json', 'artifacts/demo.csv', 'artifacts/demo.json',
@@ -80,7 +82,7 @@ def verify(root: Path = ROOT) -> dict:
         required.add('app_review_guidance.py')
     if revision in ('r11-whitebox-polished', 'r11-whitebox-final', 'r11-whitebox-desktop', 'r11-whitebox-simple'):
         required.add('app_navigation_scroll.py')
-    if revision in ('r11-whitebox-aligned','r11-whitebox-refined','r12-engine'):
+    if revision in ('r11-whitebox-aligned','r11-whitebox-refined','r12-engine','r13-contest'):
         required.update({'app_evidence.py', 'app_evidence_ui.py', 'app_evidence_rules.py',
                          'app_decomposition.py', 'app_desktop_ready.py', 'app_review_guidance.py',
                          'app_navigation_scroll.py', 'delivery/browser-activate.cmd',
@@ -88,15 +90,18 @@ def verify(root: Path = ROOT) -> dict:
                          'resources/evaluation/model.original.json',
                          'resources/evaluation/model.release.json',
                          'resources/evaluation/reevaluation.json', 'scripts/reevaluate_frozen.py'})
-    if revision in ('r11-whitebox-refined', 'r12-engine'):
+    if revision in ('r11-whitebox-refined', 'r12-engine', 'r13-contest'):
         required.update({'liushao/reference.py','liushao/feature_metadata.py','artifacts/model.original.json'})
-    if revision == 'r12-engine':
+    if revision in ('r12-engine','r13-contest'):
         required.update({'liushao_engine/__init__.py', 'artifacts/engine.joblib', 'artifacts/engine.json'})
+    if revision == 'r13-contest':
+        required.update({'app_engine_evidence.py','app_engine_inference.py',
+                         'scripts/package_contest_release.py','docs/release/CONTEST_CHANGELOG.md'})
     if not isinstance(files, dict) or not required.issubset(files):
         raise ValueError('Incomplete file manifest')
     if files['artifacts/model.joblib'].get('sha256') != MODEL:
         raise ValueError('Unexpected trusted model identity')
-    expected_descriptor = (DESCRIPTOR if revision in ('r11-whitebox-refined', 'r12-engine') else
+    expected_descriptor = (DESCRIPTOR if revision in ('r11-whitebox-refined', 'r12-engine','r13-contest') else
                            ALIGNED_DESCRIPTOR if revision == 'r11-whitebox-aligned' else LEGACY_DESCRIPTOR)
     if files['artifacts/model.json'].get('sha256') != expected_descriptor:
         raise ValueError('Unexpected trusted descriptor identity')
@@ -118,7 +123,7 @@ def verify(root: Path = ROOT) -> dict:
         identity = check_identity(read_json(package_bytes(root, name)),
                                   read_json(package_bytes(root, 'artifacts/model.json')), expected_descriptor,
                                   package_bytes(root, 'resources/evaluation/model.original.json')
-                                  if revision in ('r11-whitebox-aligned','r11-whitebox-refined','r12-engine') else None)
+                                  if revision in ('r11-whitebox-aligned','r11-whitebox-refined','r12-engine','r13-contest') else None)
         if (resource.get('format') != 1 or resource.get('identity') != identity
                 or not resource.get('files')
                 or resource.get('files', {}).get(name) != {'bytes': files[name]['bytes'], 'sha256': files[name]['sha256']}
@@ -127,7 +132,7 @@ def verify(root: Path = ROOT) -> dict:
         for resource_name, expected in resource['files'].items():
             if {k: files.get(resource_name, {}).get(k) for k in ('bytes', 'sha256')} != expected:
                 raise ValueError('Inconsistent evaluation resource: ' + resource_name)
-        if revision in ('r11-whitebox-aligned','r11-whitebox-refined','r12-engine'):
+        if revision in ('r11-whitebox-aligned','r11-whitebox-refined','r12-engine','r13-contest'):
             summary = read_json(package_bytes(root, name))
             for item in summary['sources']:
                 if resource['files'].get(item['path'], {}).get('sha256') != item['sha256']:

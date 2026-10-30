@@ -79,7 +79,7 @@ def isolated_app(tmp_path, monkeypatch, engineering_bundle):
         "csv_sha256": sha256(artifacts / "demo.csv"),
         "origins_sha256": sha256(artifacts / "demo_origins.parquet"),
     }), encoding="utf-8")
-    for name in ('app_record_tools.py','app_input.py','app_session.py','liushao_icon.svg','app_score_charts.py','app_evaluation.py','app_navigation.py','app_navigation_scroll.py','app_types.py','app_service.py','app_ui_state.py','app_ui_tools.py','app_triage.py'):
+    for name in ('app_record_tools.py','app_input.py','app_session.py','liushao_icon.svg','app_score_charts.py','app_evaluation.py','app_navigation.py','app_navigation_scroll.py','app_types.py','app_service.py','app_ui_state.py','app_ui_tools.py','app_triage.py','app_engine_evidence.py','app_engine_inference.py'):
         shutil.copyfile(source.parent/name, tmp_path/name)
     monkeypatch.setenv('LIUSHAO_EXPECTED_MODEL_SHA256', sha256(artifacts/'model.joblib'))
     monkeypatch.setenv('LIUSHAO_EXPECTED_DESCRIPTOR_SHA256', sha256(artifacts/'model.json'))

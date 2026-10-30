@@ -1,10 +1,14 @@
-"""Evaluate the 1.3.7 engine on the held-out test split (and optionally a cross-day file).
+"""Evaluate current application inference with frozen 1.3.7 engine parameters.
 
 Nothing is fitted here; the engine and base model are loaded frozen.
 Usage:
-    python -m scripts.evaluate_engine --data <processed dir> [--cross-day <csv>] --output docs/results/engine_evaluation.json
+    python -m scripts.evaluate_engine --data <processed dir> [--cross-day <csv>] --output docs/results/contest_engine_evaluation.json
+
+The old engine_evaluation.json is historical: its polarity_calibrated field was
+an orientation-folded raw AUC, not the frozen PAIC output. It is not overwritten.
 """
 import argparse
+import io
 import json
 import platform
 import time
@@ -21,6 +25,8 @@ from liushao_engine import ATTACK, NORMAL, UNSURE, analyze, drift_check, engine_
     engine_version, explain
 from liushao_engine.attribution import contributions, tree_paths
 from liushao_engine.conformal import predict_conformal
+from liushao_engine.evidence import calibrate
+from app_engine_inference import analyze_current_engine, ENGINE_INFERENCE_VERSION
 from scripts.fit_engine import load_split
 
 BUDGETS = (20, 50, 100, 200, 500, 1000, 2000)
@@ -81,7 +87,15 @@ def conformal_report(frame, y, engine):
     return out
 
 
-def evaluate_split(x, y, meta, bundle, engine, tag):
+def ecod_auc_report(y, scores, engine):
+    raw_auc = float(roc_auc_score(y, scores))
+    paic = calibrate(engine['fusion']['calibrators']['ecod'], scores)
+    return {'ecod_score_raw': raw_auc,
+            'ecod_raw_orientation_folded_using_test_labels': max(raw_auc, 1-raw_auc),
+            'ecod_frozen_paic_output': float(roc_auc_score(y, paic))}
+
+
+def evaluate_split(x, y, meta, bundle, engine, tag, *, legacy_grid_va=False):
     tick = time.perf_counter()
     pred, features, rejected = infer(x, bundle, tag, tag)
     base_seconds = time.perf_counter() - tick
@@ -89,7 +103,7 @@ def evaluate_split(x, y, meta, bundle, engine, tag):
         raise ValueError(f'{tag}: 推理未一一对应')
     pred['record_id'] = meta.record_id.to_numpy() if 'record_id' in meta else pred.record_id
     tick = time.perf_counter()
-    frame = analyze(pred, features, bundle, engine)
+    frame = (analyze if legacy_grid_va else analyze_current_engine)(pred, features, bundle, engine)
     engine_seconds = time.perf_counter() - tick
     y = np.asarray(y, dtype=int)
     rf_decision = frame.rf_anomaly.to_numpy()
@@ -100,9 +114,7 @@ def evaluate_split(x, y, meta, bundle, engine, tag):
     report = {
         'records': int(len(y)), 'attacks': int(y.sum()),
         'auc': {'rf_score': float(roc_auc_score(y, frame.rf_score)), 'lr_score': float(roc_auc_score(y, frame.lr_score)),
-                'ecod_score_raw': float(roc_auc_score(y, frame.ecod_score)),
-                'ecod_score_polarity_calibrated': float(max(roc_auc_score(y, frame.ecod_score),
-                                                            1 - roc_auc_score(y, frame.ecod_score))),
+                **ecod_auc_report(y, frame.ecod_score, engine),
                 'ds_belief': float(roc_auc_score(y, frame.ds_belief)),
                 'ds_betp': float(roc_auc_score(y, frame.ds_betp))},
         'base_rf_at_frozen_threshold': classification_metrics(y, frame.rf_score, bundle['config']['rf_threshold']),
@@ -119,7 +131,8 @@ def evaluate_split(x, y, meta, bundle, engine, tag):
                      'mean_on_rf_correct': float(frame.ds_conflict[rf_decision == y].mean()),
                      'auc_conflict_detects_rf_error': float(roc_auc_score(rf_decision != y, frame.ds_conflict))
                      if 0 < (rf_decision != y).sum() < len(y) else None},
-        'venn_abers': {'mean_width': float((frame.va_high - frame.va_low).mean()),
+        'venn_abers': {'method': 'legacy-grid-interpolation' if legacy_grid_va else 'exact-isotonic-two-label-refits',
+                       'mean_width': float((frame.va_high - frame.va_low).mean()),
                        'ece_va_mid': ece((frame.va_low + frame.va_high) / 2, y),
                        'ece_rf_score': ece(frame.rf_score, y), 'ece_ds_betp': ece(frame.ds_betp, y),
                        'brier_va_mid': float((((frame.va_low + frame.va_high) / 2 - y) ** 2).mean()),
@@ -164,19 +177,33 @@ def main():
     p.add_argument('--artifacts', default='artifacts')
     p.add_argument('--cross-day', default=None)
     p.add_argument('--cross-day-rows', type=int, default=50000)
-    p.add_argument('--output', default='docs/results/engine_evaluation.json')
+    p.add_argument('--output', default='docs/results/contest_engine_evaluation.json')
+    p.add_argument('--legacy-grid-va', action='store_true', help='Explicit historical VA interpolation comparison')
     args = p.parse_args()
     artifacts = Path(args.artifacts)
-    bundle = joblib.load(artifacts / 'model.joblib')
-    engine = joblib.load(artifacts / 'engine.joblib')
+    from app_model import verified_model
+    from app_service import load_trusted_engine
+    verified = verified_model(artifacts/'model.joblib', artifacts/'model.json')
+    # Use the already-verified bytes; attribution needs the original pipeline,
+    # while the interactive app intentionally wraps it in CheckedPredictor.
+    bundle = joblib.load(io.BytesIO(verified.content))
+    engine = load_trusted_engine(artifacts, bundle)
+    if engine is None:
+        raise ValueError('冻结引擎完整性或版本校验失败，未开始评测')
     descriptor = json.loads((artifacts / 'engine.json').read_text(encoding='utf-8'))
     if sha256(artifacts / 'engine.joblib') != descriptor['engine_sha256']:
         raise ValueError('引擎参数哈希不匹配')
     splits, summary = load_split(Path(args.data), bundle, ['train', 'test'])
     xt, yt, mt = splits['test']
-    test, _, test_features = evaluate_split(xt, yt, mt, bundle, engine, 'test')
+    test, _, test_features = evaluate_split(xt, yt, mt, bundle, engine, 'test',legacy_grid_va=args.legacy_grid_va)
     test['label_support'] = mt.label.value_counts().to_dict()
-    result = {'format': 1, 'engine_version': engine_version(engine), 'engine_sha256': descriptor['engine_sha256'],
+    result = {'format': 2, 'engine_version': engine_version(engine), 'engine_sha256': descriptor['engine_sha256'],
+              'engine_inference_version': 'legacy-grid-va-1.3.7' if args.legacy_grid_va else ENGINE_INFERENCE_VERSION,
+              'metric_definitions': {
+                  'ecod_raw_orientation_folded_using_test_labels':'max(raw AUC,1-raw AUC); diagnostic using evaluation labels, not deployable calibration or PAIC',
+                  'ecod_frozen_paic_output':'AUC of the frozen validation-A isotonic calibrator output, including its frozen clipping rule',
+                  'historical_json':'docs/results/engine_evaluation.json retains original 1.3.7 values; its ecod_score_polarity_calibrated key meant orientation-folded raw AUC, not PAIC',
+                  'queue_names':'engine_1_3_7 denotes unchanged frozen engine decision/queue parameters, not the current application version'},
               'base_model_version': bundle['model_version'], 'data_version': summary['data_version'],
               'test': test, 'attribution': attribution_check(bundle, test_features)}
     tick = time.perf_counter()
@@ -184,7 +211,7 @@ def main():
     result['drift']['seconds_per_check'] = time.perf_counter() - tick
     if args.cross_day:
         xc, yc, mc, rejected = load_cross_day(args.cross_day, bundle, args.cross_day_rows)
-        cross, _, cross_features = evaluate_split(xc, yc, mc, bundle, engine, 'cross-day')
+        cross, _, cross_features = evaluate_split(xc, yc, mc, bundle, engine, 'cross-day',legacy_grid_va=args.legacy_grid_va)
         cross.update(source=Path(args.cross_day).name, source_sha256=sha256(args.cross_day),
                      sampled_rows=args.cross_day_rows, rejected_rows=rejected,
                      label_support=mc.label.value_counts().to_dict())

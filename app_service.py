@@ -18,19 +18,36 @@ _ENGINE_CACHE = {}
 
 
 def load_trusted_engine(artifacts, bundle):
-    """artifacts/engine.joblib verified against engine.json; None means 1.3.6 behaviour."""
+    """Load the exact verified bytes; identity includes parameter AND descriptor hash.
+
+    Application fallback does not bypass the standard launcher's whole-package check.
+    """
     try:
         import liushao_engine
         path, descriptor = artifacts / 'engine.joblib', artifacts / 'engine.json'
         content = path.read_bytes()
         digest = hashlib.sha256(content).hexdigest()
-        meta = json.loads(descriptor.read_text(encoding='utf-8'))
+        descriptor_bytes = descriptor.read_bytes()
+        meta = json.loads(descriptor_bytes)
         if digest != meta['engine_sha256'] or meta['base_model_version'] != bundle['model_version']:
             return None
-        key = (digest, bundle['model_version'])
+        descriptor_digest = hashlib.sha256(descriptor_bytes).hexdigest()
+        key = (digest, descriptor_digest, bundle['model_version'])
         if key not in _ENGINE_CACHE:
             _ENGINE_CACHE.clear()
-            _ENGINE_CACHE[key] = liushao_engine.load_engine(path, bundle)
+            import joblib
+            engine = joblib.load(io.BytesIO(content))
+            if (engine.get('format') != 1 or engine.get('model_version') != bundle['model_version']
+                    or liushao_engine.engine_version(engine) != meta['engine_version']):
+                return None
+            engine = dict(engine)
+            from app_engine_inference import ENGINE_INFERENCE_VERSION
+            engine['_artifact_identity'] = {
+                'engine_sha256': digest, 'engine_descriptor_sha256': descriptor_digest,
+                'engine_version': meta['engine_version'], 'base_model_version': bundle['model_version'],
+                'base_model_sha256': meta['base_model_sha256'],
+                'engine_inference_version': ENGINE_INFERENCE_VERSION}
+            _ENGINE_CACHE[key] = engine
         return _ENGINE_CACHE[key]
     except Exception:
         return None
@@ -42,8 +59,12 @@ def with_engine(pred, features, bundle, artifacts):
     if engine is None:
         return pred
     try:
-        import liushao_engine
-        return liushao_engine.analyze(pred, features, bundle, engine)
+        from app_engine_inference import analyze_current_engine
+        result = analyze_current_engine(pred, features, bundle, engine)
+        from app_engine_evidence import IDENTITY_COLUMNS
+        for name in IDENTITY_COLUMNS:
+            result[name] = engine['_artifact_identity'][name]
+        return result
     except Exception:
         return pred
 
@@ -83,8 +104,10 @@ def analyze_input(content, name, source, bundle, model_identity, artifacts, *, p
         error = None
     except Exception as exc:
         quality, error = None, str(exc)
+    from app_engine_evidence import engine_identity
+    engine_key = engine_identity(pred.iloc[0]) if len(pred) else ('', '')
     active = ActiveInput(content, name, source, digest,
-                         '|'.join((digest, source, name, model_identity)), model_identity)
+                         '|'.join((digest, source, name, model_identity, *engine_key)), model_identity)
     return active, AnalysisResult(pred, features, rejected, time.perf_counter()-tick, len(raw)), physical, quality, error
 
 

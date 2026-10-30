@@ -17,6 +17,8 @@ from app_navigation_scroll import queue_navigation_scroll, render_navigation_scr
 from app_model import load_model_bundle, verified_model
 from app_record_tools import batch_positions
 from app_evidence import build_record_evidence, METHOD_VERSION
+from app_engine_evidence import (build_engine_evidence, engine_identity, historical_engine_label,
+                                 require_complete_engine_evidence, ENGINE_EVIDENCE_VERSION)
 from app_evidence_ui import render_record_evidence, render_evidence_detail, render_review_checklist, render_engine_panel
 from app_quick_search import promote_matches
 from app_input import preflight_input, problem_sample, present_error, UserError
@@ -314,7 +316,8 @@ def save_editor(next_after=False):
         return False
     try:
         save_review(DB, editor.record_id, bundle['model_version'], editor.status, editor.note,
-                    expected_review_id=editor.baseline, evidence_snapshot=current_evidence(editor.record_id))
+                    expected_review_id=editor.baseline,
+                    evidence_snapshot=require_complete_engine_evidence(current_evidence(editor.record_id)))
     except ReviewConflictError:
         editor.conflict = True
         st.error('另一窗口已修改这条记录。你的填写已保留，请先查看操作历史，再读取最新记录。')
@@ -576,7 +579,12 @@ def editor_for(rid, next_id):
 
 def current_evidence(rid):
     row_index=pred.index[pred.record_id.eq(rid)][0];record=pred.loc[row_index]
-    key=(u.active.key,rid,meta['model_sha256'],meta['descriptor_sha256'],METHOD_VERSION)
+    engine=load_trusted_engine(ARTIFACTS,bundle)
+    current_engine_identity=engine.get('_artifact_identity',{}) if engine else {}
+    key=(u.active.key,rid,meta['model_sha256'],meta['descriptor_sha256'],METHOD_VERSION,
+         ENGINE_EVIDENCE_VERSION,engine_identity(record),
+         current_engine_identity.get('engine_sha256'),current_engine_identity.get('engine_descriptor_sha256'),
+         current_engine_identity.get('engine_inference_version'))
     cache=st.session_state.setdefault('_record_evidence_cache',{})
     if key not in cache:
         physical=int(u.physical_rows.at[row_index]) if u.physical_rows is not None else None
@@ -602,6 +610,11 @@ def current_evidence(rid):
                 'cards':[],'all_fields':[],'selection':dict(status='unavailable',reason=str(error)),
                 'decomposition':dict(status='unavailable',reason=str(error)),
                 'assessment':dict(status='证据计算暂不可用，需外部补证',reasons=[str(error)])}
+        try:
+            cache[key]['engine']=build_engine_evidence(record,features.loc[[row_index]],bundle,engine)
+        except Exception as error:
+            cache[key]['engine']={'schema_version':1,'method_version':ENGINE_EVIDENCE_VERSION,
+                                  'status':'unavailable','reason':str(error)}
         while len(cache)>8: del cache[next(iter(cache))]
     return cache[key]
 
@@ -626,10 +639,7 @@ def record_panel(rid, order):
             with st.container(key='record_evidence'):
                 render_ruler(record, bundle['config'], compact=True)
                 render_record_evidence(payload)
-                try:
-                    render_engine_panel(record, features.loc[[row_index]], load_trusted_engine(ARTIFACTS, bundle))
-                except Exception:
-                    st.caption('研判引擎详情暂不可用，已按基学习器结果显示。')
+                render_engine_panel(payload.get('engine'))
         with judgment:
             with st.container(border=True, key='record_editor'):
                 st.markdown('### 我的判断')
@@ -655,6 +665,8 @@ def record_panel(rid, order):
             if opened and opened['record_id']==rid and opened['id']==selected_id:
                 st.info(opened['evidence_snapshot_label'])
                 if opened['evidence_snapshot'] is not None:
+                    st.caption(historical_engine_label(opened['evidence_snapshot'],engine_identity(record)))
+                    render_engine_panel(opened['evidence_snapshot'].get('engine'),historical=True)
                     st.json(opened['evidence_snapshot'],expanded=False)
 
 

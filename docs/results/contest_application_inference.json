@@ -1,0 +1,127 @@
+{
+  "status": "passed",
+  "inference_version": "r13-exact-va-v1",
+  "wrapper_sha256": "0ba986d637c4d9f3c41ab65137411a1c6d4f49d9cce16bee25ca7e9b77ae2719",
+  "frozen_model_sha256": "3c5b425f3a34454bd2b5a2738535742cc03e0f8f6e55fefc5abc5929c4dccad7",
+  "frozen_engine_sha256": "01fe41d5349d7161237f981c29b3c61db40a8742a6f157f79442c6dd1014c131",
+  "frozen_engine_source_hashes_match": true,
+  "records": 15519,
+  "distinct_test_scores": 130,
+  "changed_columns": [
+    "va_low",
+    "va_high"
+  ],
+  "unchanged_point_cp_queue_columns": true,
+  "calibration_source": "Recovered class-labelled B scores from unchanged conformal normal/attack nonconformity arrays; exact weighted isotonic refits, no grid interpolation or new fitting data.",
+  "max_abs_difference_vs_direct_unaggregated_refits": 0.0,
+  "max_endpoint_change_vs_legacy_interpolation": 0.37222733271659947,
+  "current_va_midpoint_ece": 0.002865694800175622,
+  "current_va_midpoint_brier": 0.0010594919290173668,
+  "legacy_va_midpoint_ece": 0.003717993888023415,
+  "legacy_va_midpoint_brier": 0.0014449261275016271,
+  "performance_scope": "Same local machine; cold means application VA cache cleared, not OS/process cold. In-memory cleaning + base inference + current engine; no file reads/startup/UI/SQLite/export/network. BLAS/OpenMP 1 thread; existing estimator n_jobs unchanged.",
+  "performance": [
+    {
+      "rows": 1000,
+      "cold_cache_run": {
+        "base_seconds": 0.06529030000092462,
+        "current_engine_seconds": 0.03961209999397397,
+        "combined_seconds": 0.10490239999489859
+      },
+      "warm_measured_runs": 7,
+      "warm_seconds_raw": [
+        [
+          0.04884939995827153,
+          0.015850900032091886,
+          0.06470029999036342
+        ],
+        [
+          0.04933500004699454,
+          0.01508399995509535,
+          0.06441900000208989
+        ],
+        [
+          0.05187979998299852,
+          0.015238200023304671,
+          0.06711800000630319
+        ],
+        [
+          0.06277439999394119,
+          0.01587709999876097,
+          0.07865149999270216
+        ],
+        [
+          0.05012549995444715,
+          0.015008900023531169,
+          0.06513439997797832
+        ],
+        [
+          0.04977129999315366,
+          0.014605999982450157,
+          0.06437729997560382
+        ],
+        [
+          0.04854029999114573,
+          0.013467199984006584,
+          0.062007499975152314
+        ]
+      ],
+      "warm_base_median_seconds": 0.04977129999315366,
+      "warm_engine_median_seconds": 0.01508399995509535,
+      "warm_combined_median_seconds": 0.06470029999036342,
+      "warm_combined_min_seconds": 0.062007499975152314,
+      "warm_combined_max_seconds": 0.07865149999270216
+    },
+    {
+      "rows": 15519,
+      "cold_cache_run": {
+        "base_seconds": 0.23746229999233037,
+        "current_engine_seconds": 0.4052660000161268,
+        "combined_seconds": 0.6427283000084572
+      },
+      "warm_measured_runs": 7,
+      "warm_seconds_raw": [
+        [
+          0.23857869999483228,
+          0.27049610001267865,
+          0.5090748000075109
+        ],
+        [
+          0.2517855000332929,
+          0.26828179997392,
+          0.5200673000072129
+        ],
+        [
+          0.13423889997648075,
+          0.24692480004159734,
+          0.3811637000180781
+        ],
+        [
+          0.24288000003434718,
+          0.27780759998131543,
+          0.5206876000156626
+        ],
+        [
+          0.24277720000827685,
+          0.28205330000491813,
+          0.524830500013195
+        ],
+        [
+          0.24739660002524033,
+          0.2747996000107378,
+          0.5221962000359781
+        ],
+        [
+          0.24036430002888665,
+          0.2720120999729261,
+          0.5123764000018127
+        ]
+      ],
+      "warm_base_median_seconds": 0.24277720000827685,
+      "warm_engine_median_seconds": 0.2720120999729261,
+      "warm_combined_median_seconds": 0.5200673000072129,
+      "warm_combined_min_seconds": 0.3811637000180781,
+      "warm_combined_max_seconds": 0.524830500013195
+    }
+  ]
+}

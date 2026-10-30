@@ -146,17 +146,25 @@ def test_timeout_stops_only_owned_parent_and_child_and_retains_logs(tmp_path):
 
 def test_fast_exiting_parent_cannot_leave_an_unobserved_child_green(tmp_path):
     from scripts.engineering_run import run_owned_command
-    script = ("import subprocess,sys,time,psutil; time.sleep(.05); "
-              "p=subprocess.Popen([sys.executable,'-c','import time; time.sleep(2)']); "
-              "print(p.pid,psutil.Process(p.pid).create_time(),flush=True)")
+    # The Windows venv redirector may emit stderr when killed during bootstrap.
+    # Wait for the actual child interpreter, then emit a tagged identity record;
+    # unrelated diagnostic lines must not corrupt the PID/creation-time parser.
+    child_code = "import time; print('owned-child-ready',flush=True); time.sleep(2)"
+    script = ("import subprocess,sys,time,psutil,json; time.sleep(.05); "
+              f"p=subprocess.Popen([sys.executable,'-c',{child_code!r}],stdout=subprocess.PIPE,text=True); "
+              "assert p.stdout.readline().strip()=='owned-child-ready'; "
+              "print('OWNED_CHILD '+json.dumps({'pid':p.pid,'created':psutil.Process(p.pid).create_time()}),flush=True)")
     survivors = []
     try:
         for attempt in range(4):
             log = tmp_path / f'fast-exit-{attempt}.log'
             result = run_owned_command([sys.executable, '-c', script], cwd=tmp_path,
                                        log_path=log, timeout=5)
-            pid_text, created_text = log.read_text().strip().split()
-            pid, created = int(pid_text), float(created_text)
+            identities = [line.removeprefix('OWNED_CHILD ') for line in log.read_text().splitlines()
+                          if line.startswith('OWNED_CHILD ')]
+            assert len(identities) == 1, 'Child must start and report one verified identity'
+            identity = json.loads(identities[0])
+            pid, created = int(identity['pid']), float(identity['created'])
             try:
                 child = psutil.Process(pid)
                 alive = child.create_time() == created and child.is_running()

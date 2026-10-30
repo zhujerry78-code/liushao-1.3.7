@@ -49,6 +49,7 @@ def _prepare_workspace(workspace, restart_bundle):
         "__pycache__", "*.pyc",
     ))
     for name in ('app_types.py','app_service.py','app_ui_state.py','app_ui_tools.py','app_triage.py',
+                 'app_engine_evidence.py','app_engine_inference.py',
                  'app_record_tools.py','app_input.py','app_session.py','app_desktop_ready.py','VERSION',
                  'app_evidence.py','app_evidence_ui.py','app_review_guidance.py','app_evidence_rules.py','app_decomposition.py','app_quick_search.py',
                  'liushao_icon.svg','app_navigation.py','app_navigation_scroll.py','app_score_charts.py','app_evaluation.py',

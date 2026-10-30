@@ -1,0 +1,15 @@
+{
+  "status": "passed",
+  "records": 50000,
+  "inference_version": "r13-exact-va-v1",
+  "distinct_scores": 444,
+  "direct_reference_probe_count": 201,
+  "max_probe_error_vs_direct_unaggregated_B": 0.0,
+  "all_rows_current_midpoint_ece": 0.036089270228426215,
+  "all_rows_current_midpoint_brier": 0.037991906190287576,
+  "all_rows_legacy_midpoint_ece": 0.032150839258348204,
+  "all_rows_legacy_midpoint_brier": 0.0336247480743643,
+  "max_endpoint_change_vs_legacy": 0.37222733271659947,
+  "cold_cache_va_only_seconds": 0.3198088000062853,
+  "scope": "Final application exact_va routine on all independently reproduced cross-day BetP values; direct-reference check at evenly spaced distinct-score indices (at most 201). No test-label fitting; labels only for ECE/Brier. Not whole-application performance."
+}

@@ -11,7 +11,7 @@ except ImportError:  # engine package absent: keep the 1.3.6 queues
     from liushao.model import ranked as engine_ranked, review_ranked as engine_review_ranked
 from app_types import Filters, ExportSnapshot, line_number, needs_review
 
-UI_REVISION = 'r11-final-readable'
+UI_REVISION = 'r13-contest'
 STATUS_NAMES = {'待复核': '未检查', '待补证': '需要补充信息（待补证）',
                 '确认异常': '确认异常', '确认正常': '确认正常', '复核不可用': '暂不可用'}
 FIELD_NAMES = {
@@ -115,13 +115,16 @@ def dirty(editor):
 
 def base_meta(active, result, bundle, verified):
     pred, rejected = result.predictions, result.rejected
+    from app_engine_evidence import IDENTITY_COLUMNS
+    identities = ({name: str(pred.iloc[0][name]) for name in IDENTITY_COLUMNS}
+                  if len(pred) and set(IDENTITY_COLUMNS).issubset(pred.columns) else None)
     return dict(model_version=bundle['model_version'], data_version=bundle['config']['data_version'],
         model_sha256=verified.model_sha256,
         descriptor_sha256=verified.descriptor_sha256,
         input_sha256=active['digest'], input_name=active['name'], input_source=active['source'],
         valid_rows=len(pred), unjudgeable_rows=len(rejected), rf_threshold=bundle['config']['rf_threshold'],
         lr_threshold=bundle['config']['lr_threshold'], near_margin=bundle['config']['near_margin'],
-        ui_revision=UI_REVISION)
+        ui_revision=UI_REVISION, engine_identity=identities)
 
 
 def export_snapshot(active, pred, audit, meta, available, *, features=None, physical_rows=None, bundle=None):

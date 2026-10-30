@@ -566,27 +566,42 @@ def render_evidence_detail(payload):
     return tabs
 
 
-def render_engine_panel(record, features_row, engine):
-    """1.3.7 trusted triage engine: D-S evidence, conformal set and ECOD tail evidence."""
-    if engine is None or 'cp_set' not in record:
+def render_engine_panel(snapshot, *, historical=False):
+    """Render the same immutable values used by save/export, including past rows."""
+    if not snapshot or snapshot.get('status') == 'not_used':
         return
-    import liushao_engine
-    with st.container(border=True, key='engine_panel'):
-        st.markdown('**可信研判引擎（1.3.7）**')
+    if snapshot.get('status') != 'verified':
+        st.warning('研判引擎证据暂不可用：' + snapshot.get('reason', '证据不完整'))
+        return
+    record, params = snapshot['results'], snapshot['parameters']
+    with st.container(border=True, key='historical_engine_panel' if historical else 'engine_panel'):
+        st.markdown('**保存时的研判引擎证据**' if historical else '**研判引擎证据**')
         st.markdown(f"研判结论 **{record['cp_set']}** · 信任度 Bel **{record['ds_belief']:.3f}** · "
                     f"似然度 Pl **{record['ds_plausibility']:.3f}** · 冲突度 K **{record['ds_conflict']:.3f}**")
         st.caption('结论来自 Mondrian 共形预测集：只含一个标签时确定，否则为不确定；'
                    '[Bel, Pl] 是 Dempster 融合后的攻击信任区间，K 是三个证据源相互矛盾的质量。')
         st.caption(f"共形 p 值：攻击 {record['cp_p_attack']:.3f} · 正常 {record['cp_p_normal']:.3f}"
-                   f"（显著性 ε = {engine['conformal']['epsilon']:.2f}）；"
-                   f"Venn–Abers 攻击概率区间 [{record['va_low']:.3f}, {record['va_high']:.3f}]")
+                   f"（显著性 ε = {params['epsilon']:.2f}）；"
+                   f"Venn–Abers 概率端点 [{record['va_low']:.3f}, {record['va_high']:.3f}]")
+        st.caption('概率端点按冻结校准样本逐分数精确计算；这不是固定置信水平的置信区间。'
+                   if params.get('va_method') == 'exact-isotonic-two-label-refits' else
+                   '此历史快照使用旧版网格近似概率端点，仅供参考。')
+        st.caption(f"复核提示：{'需要再检查' if record['engine_review'] else '未进入引擎复核队列'}；"
+                   f"冲突阈值 {params['conflict_cut']:.4f}。结论仍需结合外部信息核实。")
         with st.expander('三个证据源的基本概率分配'):
-            st.dataframe(liushao_engine.source_masses(record, engine), hide_index=True, width='stretch',
+            st.dataframe(pd.DataFrame(snapshot['source_masses']), hide_index=True, width='stretch',
                          column_config={k: st.column_config.NumberColumn(format='%.4f')
                                         for k in ['原始分数', '可靠度 r', 'm(攻击)', 'm(正常)', 'm(未知Θ)']})
-            if features_row is not None:
-                table = liushao_engine.ecod_explain(features_row, engine)
-                table.insert(0, '数据项', table['字段'].map(field_name))
-                st.caption('ECOD 尾部证据：经验分布尾概率越小，-log F 越大，该字段越偏离训练期正常流量。')
-                st.dataframe(table, hide_index=True, width='stretch',
-                             column_config={'尾部贡献': st.column_config.NumberColumn(format='%.3f')})
+            decomposition = snapshot['ecod_decomposition']
+            table = pd.DataFrame(decomposition['top_fields'])
+            table.insert(0, '数据项', table['field'].map(field_name))
+            table['direction'] = table['direction'].map({'left':'偏低（左尾）','right':'偏高（右尾）'})
+            table['input_missing'] = table['input_missing'].map({True:'已使用训练中位数',False:'原始有效值'})
+            table = table.rename(columns={'field':'字段','contribution':'尾部贡献','direction':'方向','input_missing':'取值状态'})
+            branch = {'left':'左尾','right':'右尾','auto':'偏度自动方向'}[decomposition['selected_branch']]
+            st.caption(f"ECOD 采用{branch}分支；全部 {len(decomposition['fields'])} 项贡献合计 "
+                       f"{decomposition['contribution_sum']:.3f}，还原原始分数 {record['ecod_score']:.3f}。"
+                       '下表仅列前六项；完整贡献随操作记录保存。')
+            st.dataframe(table, hide_index=True, width='stretch',
+                         column_config={'尾部贡献': st.column_config.NumberColumn(format='%.3f')})
+            st.caption('贡献用于解释 ECOD 原始分数，不代表该字段对最终攻击结论的因果影响。')
